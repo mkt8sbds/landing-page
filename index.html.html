@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>8 Sang BDS - Thảo dược thiên nhiên</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      scroll-behavior: smooth;
+      background-color: #000000;
+      color: #ffffff;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+    }
+    section {
+      min-height: 50vh;
+      padding: 40px 20px;
+    }
+    .btn-main {
+      background-color: #ffd700;
+      color: #000000;
+      padding: 12px 24px;
+      border-radius: 9999px;
+      font-size: 16px;
+      font-weight: 600;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+    .btn-main:hover {
+      background-color: #e6c200;
+    }
+    .btn-buy-now {
+      background-color: #000000;
+      color: #ffd700;
+      padding: 12px 24px;
+      border: 2px solid #ffd700;
+      border-radius: 9999px;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .btn-buy-now:hover {
+      background-color: #ffd700;
+      color: #000000;
+    }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      border-bottom: 1px solid #444444;
+      margin-bottom: 40px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .tab {
+      font-size: 16px;
+      font-weight: 500;
+      padding: 10px 20px;
+      cursor: pointer;
+      color: #ffffff;
+      transition: all 0.3s ease;
+    }
+    .tab:hover {
+      color: #ffd700;
+    }
+    .tab.active {
+      color: #ffd700;
+      border-bottom: 2px solid #ffd700;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .popup.active {
+      display: flex;
+    }
+    .popup-content {
+      background: #1a1a1a;
+      padding: 30px;
+      border-radius: 15px;
+      border: 2px solid #ffd700;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      color: #ffffff;
+    }
+    .popup-content input {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #444444;
+      border-radius: 5px;
+      background: #000000;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+    }
+    .popup-content input:focus {
+      border-color: #ffd700;
+      outline: none;
+    }
+    .cart {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #ffd700;
+      color: #000000;
+      padding: 10px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      z-index: 999;
+      font-weight: 600;
+    }
+    .cart:hover {
+      background: #e6c200;
+    }
+    .cart-panel {
+      display: none;
+      position: fixed;
+      top: 60px;
+      right: 20px;
+      background: #1a1a1a;
+      border-radius: 12px;
+      border: 1px solid #ffd700;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      padding: 20px;
+      width: 300px;
+      z-index: 998;
+      color: #ffffff;
+    }
+    .cart-panel.active {
+      display: block;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .cart-item button {
+      background: #ffd700;
+      color: #000000;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+    }
+    .cart-item button:hover {
+      background: #e6c200;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #ffd700;
+      color: #000000;
+      padding: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      z-index: 999;
+      font-size: 18px;
+    }
+    .back-to-top:hover {
+      background: #e6c200;
+    }
+    .hotline {
+      position: fixed;
+      left: 20px;
+      bottom: 20px;
+      background: #ffd700;
+      color: #000000;
+      padding: 10px 20px;
+      border-radius: 50px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      z-index: 999;
+      font-weight: 600;
+    }
+    .hotline:hover {
+      background: #e6c200;
+    }
+    .social {
+      position: fixed;
+      bottom: 100px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 999;
+    }
+    .social a {
+      background: #000000;
+      padding: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      color: #ffd700;
+      font-size: 20px;
+      transition: all 0.3s ease;
+    }
+    .social a:hover {
+      background: #ffd700;
+      color: #000000;
+    }
+    .swiper {
+      position: relative;
+      padding-bottom: 40px;
+    }
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+    }
+    .swiper-pagination {
+      bottom: 10px !important;
+    }
+    .swiper-button-prev,
+    .swiper-button-next {
+      color: #ffd700;
+      background: #000000;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .swiper-button-prev:hover,
+    .swiper-button-next:hover {
+      background: #ffd700;
+      color: #000000;
+    }
+    footer {
+      background: #1c1c1c;
+      color: #fff;
+      padding: 40px 20px;
+      font-family: 'Inter', sans-serif;
+    }
+    footer a {
+      color: #ffd700;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #e6c200;
+    }
+    .news-card {
+      background: #1a1a1a;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      color: #ffffff;
+      position: relative;
+      overflow: hidden;
+    }
+    .news-card.featured {
+      border: 2px solid #ffd700;
+    }
+    .news-card.featured::before {
+      content: 'Nổi bật';
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #ffd700;
+      color: #000000;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .news-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .news-card h4 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .news-card p {
+      font-size: 14px;
+      color: #cccccc;
+      margin-bottom: 10px;
+    }
+    .news-card a {
+      color: #ffd700;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .news-card a:hover {
+      color: #e6c200;
+    }
+    /* Product-specific styles from sanpham.html */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .product-card {
+      background: #1a1a1a;
+      border-radius: 12px;
+      padding: 1rem;
+      position: relative;
+    }
+    .product-card img {
+      width: 100%;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover img {
+      transform: scale(1.05);
+    }
+    .price {
+      color: #ff0000; /* Red for discounted price */
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .price:not(:has(+ .old-price)) {
+      color: #ffd700; /* Yellow for non-discounted price */
+    }
+    .old-price {
+      text-decoration: line-through;
+      color: #ffd700; /* Yellow for original price */
+      font-size: 0.9rem;
+    }
+    .btns {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+    .btns button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .add-cart {
+      background: orange;
+      color: #000;
+    }
+    .buy-now {
+      background: #000;
+      color: #fff;
+      border: 1px solid #fff;
+    }
+    @media(max-width: 768px) {
+      .nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HERO from demo1.html -->
+  <section class="relative bg-cover bg-center text-white flex items-center justify-center" style="background-image: url('images/1466x460.jpg');">
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="z-10 text-center px-4" data-aos="fade-up">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Thảo Dược 8 Sang BDS</h1>
+      <p class="text-lg md:text-xl mb-4">An toàn – Hiệu quả – Thiên nhiên</p>
+      <p class="mb-6 text-xl font-semibold text-[#ffd700]">Dầu Hít 8S: 139.000đ – Mua 5 tặng 1</p>
+      <a href="#products" class="btn-main">Khám phá sản phẩm</a>
+    </div>
+  </section>
+
+  <!-- PRODUCTS from sanpham.html -->
+  <section id="products" class="bg-[#000000] px-4 py-10">
+    <div class="text-center mb-10" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-[#ffd700]">Sản phẩm nổi bật</h2>
+      <p class="text-gray-400 mt-2">Thảo dược 8S - Chăm sóc sức khỏe từ thiên nhiên</p>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active" onclick="showTab('dau-hit', this)">Dầu Hít</div>
+      <div class="tab" onclick="showTab('cao-xoa-bop', this)">Cao Xoa Bóp</div>
+      <div class="tab" onclick="showTab('vien-uong', this)">Viên Uống</div>
+    </div>
+
+    <div id="dau-hit" class="tab-content active">
+      <div class="products">
+        <div class="product-card">
+          <img src="images/dauhit011.jpg" alt="Dầu hít 8S 1 chai">
+          <p><strong>Dầu Hít Thảo Dược 8S</strong></p>
+          <p class="price">139.000đ <span class="old-price">199.000đ</span></p>
+          <div class="btns">
+            <button class="add-cart" onclick="addToCart('Dầu Hít Thảo Dược 8S', 139000)">Thêm vào giỏ</button>
+            <button class="buy-now" onclick="openPopup('Dầu Hít Thảo Dược 8S')">Mua ngay</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="images/5tang1dauhit.jpg" alt="Dầu hít mua 5 tặng 1">
+          <p><strong>Dầu hít mua 5 tặng 1</strong></p>
+          <p class="price">695.000đ</p>
+          <div class="btns">
+            <button class="add-cart" onclick="addToCart('Combo Dầu Hít 5+1', 695000)">Thêm vào giỏ</button>
+            <button class="buy-now" onclick="openPopup('Combo Dầu Hít 5+1')">Mua ngay</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="images/mua10tang3dauhit.jpg" alt="Dầu hít mua 10 tặng 3">
+          <p><strong>Mua 10 tặng 3</strong></p>
+          <p class="price">1.390.000đ</p>
+          <div class="btns">
+            <button class="add-cart" onclick="addToCart('Combo Dầu Hít 10+3', 1390000)">Thêm vào giỏ</button>
+            <button class="buy-now" onclick="openPopup('Combo Dầu Hít 10+3')">Mua ngay</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="cao-xoa-bop" class="tab-content">
+      <div class="products">
+        <div class="product-card">
+          <img src="img/cao1.png" alt="Cao xoa bóp chai nhôm">
+          <p><strong>Cao xoa bóp chai nhôm</strong></p>
+          <p class="price">239.000đ</p>
+          <div class="btns">
+            <button class="add-cart" onclick="addToCart('Cao xoa bóp 1 chai', 239000)">Thêm vào giỏ</button>
+            <button class="buy-now" onclick="openPopup('Cao xoa bóp 1 chai')">Mua ngay</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="img/cao2.png" alt="Cao xoa bóp combo 3 tặng 1">
+          <p><strong>Combo 3 tặng 1</strong></p>
+          <p class="price">717.000đ <span class="old-price">956.000đ</span></p>
+          <div class="btns">
+            <button class="add-cart" onclick="addToCart('Combo Cao xoa bóp 3+1', 717000)">Thêm vào giỏ</button>
+            <button class="buy-now" onclick="openPopup('Combo Cao xoa bóp 3+1')">Mua ngay</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="images/5tang1dauhit.jpg" alt="Dầu hít mua 5 tặng 1">
+          <p><strong>Dầu hít mua 5 tặng 1</strong></p>
+          <p class="price">695.000đ</p>
+          <div class="btns">
+            <button class="add-cart" onclick="addToCart('Combo Dầu Hít 5+1', 695000)">Thêm vào giỏ</button>
+            <button class="buy-now" onclick="openPopup('Combo Dầu Hít 5+1')">Mua ngay</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="vien-uong" class="tab-content">
+      <div class="products">
+        <div class="product-card">
+          <img src="img/vien1.png" alt="Viên uống 8S">
+          <p><strong>Viên uống thảo dược 8S</strong></p>
+          <p class="price">299.000đ</p>
+          <div class="btns">
+            <button class="add-cart" onclick="addToCart('Viên Uống Thảo Dược 8S', 299000)">Thêm vào giỏ</button>
+            <button class="buy-now" onclick="openPopup('Viên Uống Thảo Dược 8S')">Mua ngay</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO GIỚI THIỆU from demo1.html -->
+  <section class="text-center py-10 bg-[#1a1a1a]">
+    <h2 class="text-2xl font-bold mb-4 text-[#ffd700]">Video giới thiệu sản phẩm</h2>
+    <iframe class="mx-auto rounded-xl shadow-lg" width="360" height="215" src="https://www.youtube.com/embed/sqOTaA_QyLc" title="YouTube video" allowfullscreen></iframe>
+  </section>
+
+  <!-- FORM LIÊN HỆ from demo1.html -->
+  <section id="contact" class="bg-[#000000] px-4 py-12">
+    <div class="max-w-2xl mx-auto" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-center mb-8 text-[#ffd700]">Liên hệ với chúng tôi</h2>
+      <p class="text-center text-gray-400 mb-8">Hãy để lại thông tin, chúng tôi sẽ liên hệ ngay!</p>
+      <form class="contact-form">
+        <input type="text" name="name" placeholder="Họ và tên" required style="background: #1a1a1a; border: 1px solid #444444; color: #ffffff; padding: 12px; border-radius: 8px; width: 100%; margin-bottom: 16px;">
+        <input type="email" name="email" placeholder="Email" required style="background: #1a1a1a; border: 1px solid #444444; color: #ffffff; padding: 12px; border-radius: 8px; width: 100%; margin-bottom: 16px;">
+        <input type="tel" name="phone" placeholder="Số điện thoại" required style="background: #1a1a1a; border: 1px solid #444444; color: #ffffff; padding: 12px; border-radius: 8px; width: 100%; margin-bottom: 16px;">
+        <textarea name="message" rows="5" placeholder="Tin nhắn của bạn" required style="background: #1a1a1a; border: 1px solid #444444; color: #ffffff; padding: 12px; border-radius: 8px; width: 100%; margin-bottom: 16px;"></textarea>
+        <button type="submit" class="btn-main">Gửi liên hệ</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- TIN TỨC from demo1.html -->
+  <section class="bg-[#000000] px-4 py-12">
+    <h2 class="text-3xl font-bold text-center mb-8 text-[#ffd700]">Tin tức mới nhất</h2>
+    <div class="swiper">
+      <div class="swiper-wrapper" id="rss-news"></div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+    <div class="text-center mt-6">
+      <a href="https://caoxoabopthaoduoc8s.vn/tin-tuc" target="_blank" class="btn-main">Xem thêm</a>
+    </div>
+  </section>
+
+  <!-- FOOTER from demo1.html -->
+  <footer style="background-color:#1c1c1c; color:#fff; padding: 40px 20px; font-family: 'Inter', sans-serif;">
+    <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; gap: 20px;">
+      <div style="flex: 1; min-width: 220px;">
+        <img src="https://8sangbds.com/logo.png" alt="8 Sang BDS Logo" style="max-width: 150px; margin-bottom: 10px;">
+        <h3 style="font-size: 1rem; font-weight: 700;">CÔNG TY TNHH 8 SANG BDS -<br> "Vì sức khỏe mọi nhà"</h3>
+        <p style="font-size: 0.9rem; margin-top: 10px;">
+          Giấy chứng nhận đăng ký doanh nghiệp số: 0316897403. Nơi cấp: Phòng đăng ký kinh doanh – Sở Kế hoạch và Đầu tư TP.HCM cấp lần đầu ngày 09/06/2021; cấp thay đổi lần thứ 1 ngày 01/12/2021.
+        </p>
+        <div style="margin-top: 10px; display: flex; gap: 10px;">
+          <a href="https://www.facebook.com/8sangbds" style="color: #ffd700; font-size: 20px;"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://zalo.me/1900888663" style="color: #ffd700; font-size: 20px;"><i class="fas fa-comment"></i></a>
+          <a href="#" style="color: #ffd700; font-size: 20px;"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div style="flex: 1; min-width: 220px;">
+        <h4 style="font-size: 1.1rem; font-weight: 700;">Thông tin công ty</h4>
+        <p>Trụ sở chính: 218 Tên Lửa, phường Bình Trị Đông B, quận Bình Tân, TP. Hồ Chí Minh</p>
+        <p>Địa chỉ liên hệ: 218 Tên Lửa, phường Bình Trị Đông B, quận Bình Tân, TP. Hồ Chí Minh</p>
+        <p><strong>Hotline:</strong> <a href="tel:1900888663" style="color: #ffd700;">1900888663</a></p>
+        <p>Mua hàng: <a href="tel:0818299606" style="color: #ffd700;">0818299606</a> - CSKH: <a href="tel:0938756005" style="color: #ffd700;">0938.756.005</a></p>
+        <p>Email: <a href="mailto:8sangbds@gmail.com" style="color: #ffd700;">8sangbds@gmail.com</a></p>
+        <p>MST: 0316897403</p>
+      </div>
+      <div style="flex: 1; min-width: 180px;">
+        <h4 style="font-size: 1.1rem; font-weight: 700;">Quy định và chính sách</h4>
+        <ul style="list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6;">
+          <li><a href="#" style="color: #ffd700; text-decoration: none;">Giới thiệu</a></li>
+          <li><a href="#" style="color: #ffd700; text-decoration: none;">Điều khoản chung</a></li>
+          <li><a href="#" style="color: #ffd700; text-decoration: none;">Chính sách bảo mật</a></li>
+          <li><a href="#" style="color: #ffd700; text-decoration: none;">Phương thức thanh toán</a></li>
+          <li><a href="#" style="color: #ffd700; text-decoration: none;">Theo dõi đơn hàng</a></li>
+          <li><a href="#" style="color: #ffd700; text-decoration: none;">Phương thức hoàn tiền</a></li>
+          <li><a href="#" style="color: #ffd700; text-decoration: none;">Bảo vệ thông tin cá nhân</a></li>
+        </ul>
+      </div>
+      <div style="flex: 1; min-width: 220px;">
+        <h4 style="font-size: 1.1rem; font-weight: 700;">Fanpage</h4>
+        <div style="margin-top: 10px;">
+          <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F8sangbds&tabs=timeline&width=250&height=160&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
+            width="250" height="160" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
+            allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+        </div>
+      </div>
+    </div>
+    <div style="border-top: 1px solid #444; padding-top: 20px; text-align: center; font-size: 14px; margin-top: 20px;">© 2025 CÔNG TY TNHH 8 SANG BDS</div>
+  </footer>
+
+  <!-- Hotline from demo1.html -->
+  <div class="hotline"><i class="fas fa-phone-alt"></i> 1900 888 663</div>
+
+  <!-- Zalo/Messenger from sanpham.html -->
+  <div style="position: fixed; bottom: 1rem; right: 1rem; display: flex; flex-direction: column; gap: 0.5rem; z-index: 100;">
+    <a href="https://zalo.me/2368661726434406455" target="_blank">
+      <img src="https://stc-zaloprofile.zdn.vn/pc/v1/images/zalo_sharelogo.png" width="48" alt="Zalo">
+    </a>
+    <a href="https://m.me/your_facebook_page" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Facebook_Messenger_4_Logo.svg" width="48" alt="Messenger">
+    </a>
+  </div>
+
+  <!-- Back to Top from demo1.html -->
+  <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><i class="fas fa-arrow-up"></i></div>
+
+  <!-- Cart from demo1.html -->
+  <div class="cart" onclick="toggleCart()"><i class="fas fa-shopping-cart"></i> Giỏ hàng (<span id="cart-count">0</span>)</div>
+  <div class="cart-panel" id="cart-panel">
+    <h4 class="font-semibold mb-4">Giỏ hàng của bạn</h4>
+    <div id="cart-items"></div>
+    <p class="mt-4 font-semibold">Tổng tiền: <span id="cart-total">0</span>đ</p>
+  </div>
+
+  <!-- Popup Đặt Hàng from sanpham.html, styled like demo1.html -->
+  <div class="popup" id="order-popup">
+    <div class="popup-content">
+      <h3 class="font-bold mb-4 text-[#ffd700]">Đặt hàng ngay</h3>
+      <form onsubmit="submitForm(event)">
+        <input type="text" id="productInput" placeholder="Sản phẩm" readonly>
+        <input type="text" placeholder="Họ và tên" required>
+        <input type="tel" placeholder="Số điện thoại" required>
+        <input type="text" placeholder="Địa chỉ nhận hàng" required>
+        <button type="submit" class="btn-main mt-4">Xác nhận đặt hàng</button>
+        <button type="button" onclick="closePopup()" class="bg-[#000000] border border-[#ffd700] text-[#ffd700] px-4 py-2 rounded mt-2 hover:bg-[#ffd700] hover:text-[#000000]">Hủy</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true });
+
+    const swiper = new Swiper('.swiper', {
+      slidesPerView: 1.2,
+      spaceBetween: 16,
+      pagination: { el: '.swiper-pagination', clickable: true },
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+      breakpoints: { 768: { slidesPerView: 2.5 }, 1024: { slidesPerView: 3.5 } }
+    });
+
+    async function loadRSS() {
+      try {
+        const res = await axios.get('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent('https://caoxoabopthaoduoc8s.vn/tin-tuc?format=feed&type=rss'));
+        const items = res.data.items.slice(0, 6);
+        const wrapper = document.getElementById('rss-news');
+        items.forEach((item, index) => {
+          const isFeatured = index < 2;
+          const image = item.thumbnail || 'https://via.placeholder.com/300x150?text=Tin+Tức';
+          wrapper.innerHTML += `
+            <div class='swiper-slide'>
+              <div class='news-card ${isFeatured ? 'featured' : ''}'>
+                <img src='${image}' alt='${item.title}'>
+                <h4>${item.title}</h4>
+                <p>${item.description.slice(0, 100)}...</p>
+                <a href='${item.link}' target='_blank'>Xem chi tiết</a>
+              </div>
+            </div>`;
+        });
+        swiper.update();
+      } catch (error) {
+        console.error('Lỗi khi tải RSS:', error);
+        document.getElementById('rss-news').innerHTML = '<p>Không thể tải tin tức. Vui lòng thử lại sau.</p>';
+      }
+    }
+    loadRSS();
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function saveCart() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCart();
+    }
+
+    function addToCart(name, price) {
+      const existingItem = cart.find(item => item.name === name);
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({ name, price, quantity: 1 });
+      }
+      saveCart();
+    }
+
+    function removeFromCart(name) {
+      cart = cart.filter(item => item.name !== name);
+      saveCart();
+    }
+
+    function updateCart() {
+      const cartItems = document.getElementById('cart-items');
+      const cartCount = document.getElementById('cart-count');
+      const cartTotal = document.getElementById('cart-total');
+      cartItems.innerHTML = '';
+      let total = 0;
+      let count = 0;
+
+      cart.forEach(item => {
+        total += item.price * item.quantity;
+        count += item.quantity;
+        cartItems.innerHTML += `
+          <div class="cart-item">
+            <span>${item.name} x${item.quantity}</span>
+            <span>${(item.price * item.quantity).toLocaleString()}đ</span>
+            <button onclick="removeFromCart('${item.name}')">Xóa</button>
+          </div>`;
+      });
+
+      cartCount.textContent = count;
+      cartTotal.textContent = total.toLocaleString();
+    }
+
+    function toggleCart() {
+      const cartPanel = document.getElementById('cart-panel');
+      cartPanel.classList.toggle('active');
+    }
+
+    function showTab(tabId, element) {
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      element.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    function openPopup(productName) {
+      document.getElementById('order-popup').classList.add('active');
+      document.getElementById('productInput').value = productName;
+    }
+
+    function closePopup() {
+      document.getElementById('order-popup').classList.remove('active');
+    }
+
+    function submitForm(e) {
+      e.preventDefault();
+      alert("Đơn hàng đã được gửi!");
+      e.target.reset();
+      closePopup();
+    }
+
+    window.addEventListener('scroll', () => {
+      const backToTop = document.querySelector('.back-to-top');
+      backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+
+    updateCart();
+  </script>
+</body>
+</html>
