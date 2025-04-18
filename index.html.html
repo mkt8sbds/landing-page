@@ -1,90 +1,134 @@
 <!DOCTYPE html>
+
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>8 Sang BDS - Thảo dược thiên nhiên</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta content="Thảo Dược 8 Sang BDS - Sản phẩm chăm sóc sức khỏe từ thiên nhiên" name="description"/>
+<meta content="index, follow" name="robots"/>
+<title>8 Sang BDS - Thảo dược thiên nhiên</title>
+<link crossorigin="" href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdn.jsdelivr.net" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" media="print" onload="this.media='all'" rel="stylesheet"/>
+<link async="" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link async="" href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+<link async="" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/>
+<script crossorigin="anonymous" defer="" src="https://kit.fontawesome.com/a076d05399.js"></script>
+<style>
     :root {
-      --primary-color: #ffd700;
-      --bg-color: #000000;
-      --text-color: #ffffff;
-      --accent-color: #1a1a1a;
-      --gray-color: #cccccc;
+      --primary-color: #ffd700; /* Vàng */
+      --bg-color: #121212; /* Đen đậm */
+      --text-color: #ffffff; /* Trắng */
+      --accent-color: #1e1e1e; /* Đen nhạt cho card */
+      --gray-color: #b0b0b0; /* Xám cho phụ */
+      --silver-color: #e0e0e0;
+    }
+
+    *, *:before, *:after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
       scroll-behavior: smooth;
       line-height: 1.6;
-      margin: 0;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     h1, h2, h3, h4, h5, h6 {
-      font-weight: 700;
-      margin-bottom: 1rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.02em;
     }
 
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 1.5rem;
+      padding: 0 1rem;
     }
 
     section {
-      padding: 5rem 0;
+      padding: 4rem 0;
       position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 1;
+    }
+
+    /* Button Styles */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      will-change: transform, box-shadow;
     }
 
     .btn-main {
-      background-color: var(--primary-color);
+      background: linear-gradient(45deg, var(--primary-color), #e6c200);
       color: #000000;
-      padding: 0.75rem 2rem;
-      border-radius: 9999px;
-      font-size: 1rem;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      display: inline-block;
-      text-align: center;
     }
 
     .btn-main:hover {
-      background-color: #e6c200;
+      background: linear-gradient(45deg, #e6c200, var(--primary-color));
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 215, 0, 0.5);
+    }
+
+    .btn-buy-now {
+      background: transparent;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+    }
+
+    .btn-buy-now:hover {
+      background: var(--primary-color);
+      color: #000000;
+      border-color: transparent;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 215, 0, 0.5);
+    }
+
+    .btn-close {
+      background: transparent;
+      color: var(--gray-color);
+      border: 2px solid var(--gray-color);
+    }
+
+    .btn-close:hover {
+      color: var(--primary-color);
+      border-color: var(--primary-color);
       transform: translateY(-2px);
     }
 
     .btn-pulse {
-      animation: pulse 2s infinite;
+      animation: pulse 2s infinite ease-in-out;
     }
 
     @keyframes pulse {
-      0% { transform: scale(1); }
+      0%, 100% { transform: scale(1); }
       50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
     }
 
-    .btn-buy-now {
-      background-color: transparent;
-      color: var(--primary-color);
-      padding: 0.75rem 2rem;
-      border: 2px solid var(--primary-color);
-      border-radius: 9999px;
-      font-size: 1rem;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    .btn-buy-now:hover {
-      background-color: var(--primary-color);
-      color: #000000;
-      transform: translateY(-2px);
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 8px rgba(255, 215, 0, 0.4); }
+      50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
     }
 
     /* Header */
@@ -93,58 +137,80 @@
       top: 0;
       left: 0;
       width: 100%;
-      background: var(--bg-color);
+      background: rgba(18, 18, 18, 0.95);
       border-bottom: 1px solid #333;
       z-index: 1000;
-      height: 80px; /* Chiều cao cố định */
+      height: 64px;
       display: flex;
       align-items: center;
+      backdrop-filter: blur(10px);
     }
 
     .header-content {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 1rem;
     }
 
     .logo img {
       max-width: 120px;
+      height: auto;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .logo img:hover {
+      transform: scale(1.05);
     }
 
     .nav-menu {
       display: flex;
       gap: 2rem;
+      align-items: center;
     }
 
     .nav-menu a {
       color: var(--text-color);
-      font-weight: 500;
-      font-size: 1rem;
-      transition: color 0.3s ease;
+      font-weight: 600;
+      font-size: 0.875rem;
+      transition: color 0.3s ease-in-out;
+      text-transform: uppercase;
+      text-decoration: none;
+      position: relative;
     }
 
     .nav-menu a:hover {
       color: var(--primary-color);
     }
 
-    @media (max-width: 768px) {
-      .nav-menu {
-        display: none; /* Ẩn menu trên mobile, có thể thêm hamburger menu nếu cần */
-      }
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: var(--primary-color);
+      bottom: -4px;
+      left: 0;
+      transition: width 0.3s ease-in-out;
+    }
+
+    .nav-menu a:hover::after {
+      width: 100%;
     }
 
     /* Hero Section */
     .hero {
-      min-height: 80vh; /* Chiều cao cố định */
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       background-size: cover;
       background-position: center;
-      background-repeat: no-repeat;
       position: relative;
       text-align: center;
-      padding-top: 80px; /* Đảm bảo không bị che bởi header */
+      padding-top: 64px;
     }
 
     .hero::before {
@@ -154,7 +220,8 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8));
+      z-index: 0;
     }
 
     .hero-content {
@@ -165,41 +232,227 @@
     }
 
     .hero h1 {
-      font-size: 4rem; /* Tiêu đề lớn hơn */
+      font-size: clamp(2rem, 5vw, 4rem);
       line-height: 1.2;
-      margin-bottom: 2.5rem; /* Tăng khoảng cách */
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     }
 
     .hero p {
-      font-size: 1.25rem; /* Dòng phụ nhỏ hơn */
-      margin-bottom: 3rem; /* Tăng khoảng cách */
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 500;
+      margin-bottom: 2rem;
     }
 
     .hero p.price-highlight {
-      font-size: 1.5rem; /* Dòng giá nổi bật */
+      font-size: clamp(1.5rem, 3vw, 2rem);
       color: var(--primary-color);
-      margin-bottom: 4rem; /* Tăng khoảng cách */
+      font-weight: 800;
+      margin-bottom: 2rem;
+      animation: glow 2s infinite;
     }
 
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2.5rem;
-      }
+    /* Products */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      justify-items: center;
+    }
 
-      .hero p {
-        font-size: 1rem;
-      }
+    .product-card {
+      background: var(--accent-color);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: all 0.3s ease-in-out;
+      border: 1px solid #333;
+      width: 100%;
+      max-width: 280px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      will-change: transform, box-shadow;
+    }
 
-      .hero p.price-highlight {
-        font-size: 1.25rem;
-      }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
+      border: 1px solid var(--primary-color);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      display: block;
+      loading: lazy;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .product-card img:hover {
+      transform: scale(1.05);
+    }
+
+    .product-card p strong {
+      font-size: 1rem;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 0.75rem;
+      cursor: pointer;
+      transition: color 0.3s ease-in-out;
+    }
+
+    .product-card p strong:hover {
+      color: var(--primary-color);
+    }
+
+    .product-card p {
+      font-size: 0.875rem;
+      color: var(--gray-color);
+      margin-bottom: 0.75rem;
+    }
+
+    .price {
+      color: var(--primary-color);
+      font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+      font-weight: 900;
+      margin: 1rem 0;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .old-price {
+      text-decoration: line-through;
+      color: var(--gray-color);
+      font-size: 0.875rem;
+      margin-left: 0.5rem;
+    }
+
+    .badge {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      background: #ff0000;
+      color: #ffffff;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .btns {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Video Section */
+    .video-section {
+      background: var(--accent-color);
+      text-align: center;
+    }
+
+    .video-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      loading: lazy;
+    }
+
+    /* News Section */
+    .news-section {
+      background: var(--bg-color);
+      text-align: center;
+    }
+
+    .swiper-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .swiper-slide {
+      background: var(--accent-color);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: left;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .swiper-slide:hover {
+      transform: translateY(-8px);
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      loading: lazy;
+    }
+
+    .swiper-slide h3 {
+      font-size: 1.25rem;
+      color: var(--primary-color);
+      margin-bottom: 0.75rem;
+    }
+
+    .swiper-slide p {
+      font-size: 0.875rem;
+      color: var(--gray-color);
+      margin-bottom: 1rem;
+    }
+
+    .swiper-pagination-bullet {
+      background: var(--gray-color);
+      opacity: 0.5;
+    }
+
+    .swiper-pagination-bullet-active {
+      background: var(--primary-color);
+      opacity: 1;
+    }
+
+    .swiper-button/next, .swiper-button-prev {
+      color: var(--primary-color);
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .swiper-button-next:after, .swiper-button-prev:after {
+      font-size: 1rem;
     }
 
     /* Tabs */
     .tabs {
       display: flex;
       justify-content: center;
-      gap: 1rem;
+      gap: 1.5rem;
       margin-bottom: 3rem;
       overflow-x: auto;
       white-space: nowrap;
@@ -207,12 +460,13 @@
 
     .tab {
       font-size: 1rem;
-      font-weight: 500;
+      font-weight: 600;
       padding: 0.75rem 1.5rem;
       cursor: pointer;
-      color: var(--text-color);
-      transition: all 0.3s ease;
+      color: var(--gray-color);
+      transition: all 0.3s ease-in-out;
       border-bottom: 2px solid transparent;
+      text-transform: uppercase;
     }
 
     .tab:hover {
@@ -226,123 +480,14 @@
 
     .tab-content {
       display: none;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      width: 100%;
     }
 
     .tab-content.active {
       display: block;
-    }
-
-    /* Products */
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Giảm min-width để gọn hơn */
-      gap: 1.5rem; /* Giảm gap */
-    }
-
-    .product-card {
-      background: var(--accent-color);
-      border-radius: 12px;
-      padding: 1.25rem; /* Giảm padding */
-      position: relative;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    .product-card img {
-      width: 100%;
-      height: 220px; /* Giảm chiều cao ảnh */
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-      transition: transform 0.3s ease;
-    }
-
-    .product-card:hover img {
-      transform: scale(1.05);
-    }
-
-    .product-card p strong {
-      font-size: 1.2rem; /* Tăng kích thước tên sản phẩm */
-    }
-
-    .price {
-      color: #ff0000;
-      font-size: 1.4rem; /* Giảm kích thước giá */
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-    }
-
-    .price:not(:has(+ .old-price)) {
-      color: var(--primary-color);
-    }
-
-    .old-price {
-      text-decoration: line-through;
-      color: var(--primary-color);
-      font-size: 0.9rem; /* Giảm kích thước giá gốc */
-      margin-left: 0.5rem;
-    }
-
-    .badge {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      background: #ff0000;
-      color: #ffffff;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      font-size: 0.875rem;
-      font-weight: 600;
-    }
-
-    .btns {
-      display: flex;
-      gap: 0.75rem; /* Giảm gap */
-      margin-top: 1rem;
-    }
-
-    /* Contact Form */
-    .contact-form {
-      position: relative;
-    }
-
-    .contact-form .input-wrapper {
-      position: relative;
-      margin-bottom: 1.5rem;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 0.75rem 0.75rem 0.75rem 2.5rem;
-      border: 1px solid #444444;
-      border-radius: 8px;
-      background: #000000;
-      color: var(--text-color);
-      font-family: 'Inter', sans-serif;
-    }
-
-    .contact-form input::placeholder,
-    .contact-form textarea::placeholder {
-      color: var(--gray-color);
-    }
-
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      border-color: var(--primary-color);
-      outline: none;
-    }
-
-    .contact-form .icon {
-      position: absolute;
-      left: 0.75rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--gray-color);
+      opacity: 1;
     }
 
     /* Popup */
@@ -353,683 +498,1307 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.9);
       justify-content: center;
       align-items: center;
-      z-index: 1000;
+      z-index: 2000;
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
     }
 
     .popup.active {
       display: flex;
+      opacity: 1;
     }
 
     .popup-content {
       background: var(--accent-color);
       padding: 2rem;
-      border-radius: 12px;
+      border-radius: 16px;
       border: 2px solid var(--primary-color);
-      max-width: 450px;
-      width: 90%;
+      max-width: min(700px, 90vw);
+      width: 100%;
+      text-align: center;
+      transform: scale(0.8);
+      opacity: 0;
+      transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .popup.active .popup-content {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .popup-content h3 {
+      font-size: clamp(1.5rem, 3vw, 1.75rem);
+      font-weight: 800;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    .popup-content p {
+      font-size: clamp(0.875rem, 2vw, 1rem);
+      color: var(--gray-color);
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    .popup-content img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      border-radius: 12px;
+      margin: 1rem auto;
+      display: block;
+      loading: lazy;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .popup-content ul {
+      list-style: disc;
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+      text-align: left;
+      font-size: clamp(0.875rem, 2vw, 1rem);
+      color: var(--gray-color);
+    }
+
+    .popup-content .btn {
+      margin: 0.75rem;
+    }
+
+    /* Policy Modal */
+    .policy-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
+    }
+
+    .policy-modal.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .policy-content {
+      background: var(--accent-color);
+      padding: 2rem;
+      border-radius: 16px;
+      border: 2px solid var(--primary-color);
+      max-width: min(700px, 90vw);
+      width: 100%;
+      transform: scale(0.8);
+      opacity: 0;
+      transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .policy-modal.active .policy-content {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .policy-grid {
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 2rem;
+    }
+
+    .policy-content h3 {
+      font-size: clamp(1.5rem, 3vw, 1.75rem);
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      grid-column: 1 / -1;
+    }
+
+    .policy-content h4 {
+      font-size: 1.25rem;
+      color: var(--text-color);
+      margin: 1rem 0 0.5rem;
+    }
+
+    .policy-content p {
+      font-size: 0.875rem;
+      color: var(--gray-color);
+      margin-bottom: 1rem;
+    }
+
+    .policy-sidebar {
       text-align: center;
     }
 
-    .popup-content input,
-    .popup-content textarea {
-      width: 100%;
-      margin-bottom: 1rem;
-      padding: 0.75rem;
-      border: 1px solid #444444;
-      border-radius: 8px;
-      background: #000000;
-      color: var(--text-color);
-      font-family: 'Inter', sans-serif;
+    .policy-sidebar h4 {
+      font-size: 1rem;
+      color: var(--primary-color);
     }
 
-    .popup-content input:focus,
-    .popup-content textarea:focus {
+    .policy-sidebar a {
+      color: var(--primary-color);
+      font-size: 0.875rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.3s ease-in-out;
+    }
+
+    .policy-sidebar a:hover {
+      color: #e6c200;
+    }
+
+    /* Contact Section */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .contact-form .input-group {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-form .input-group i {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray-color);
+    }
+
+    .contact-form input,
+    .contact-form textarea,
+    .popup-content input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      border-radius: 8px;
+      background: var(--accent-color);
+      border: 1px solid #333;
+      color: #000000; /* Chữ đen khi gõ */
+      font-size: 0.875rem;
+      transition: border-color 0.3s ease-in-out;
+    }
+
+    .contact-form textarea {
+      padding: 0.75rem 1rem;
+      resize: vertical;
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder,
+    .popup-content input::placeholder {
+      color: var(--gray-color); /* Placeholder xám */
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus,
+    .popup-content input:focus {
       border-color: var(--primary-color);
       outline: none;
     }
 
-    /* Cart */
-    .cart {
-      position: fixed;
-      top: 90px; /* Đẩy xuống để không che header */
-      right: 1.5rem;
-      background: var(--primary-color);
-      color: #000000;
-      padding: 0.75rem 1.5rem;
-      border-radius: 50px;
-      cursor: pointer;
-      z-index: 999;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    .cart:hover {
-      background: #e6c200;
-    }
-
-    .cart-panel {
-      display: none;
-      position: fixed;
-      top: 140px; /* Đẩy xuống thêm */
-      right: 1.5rem;
-      background: var(--accent-color);
+    .map-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
       border-radius: 12px;
-      border: 1px solid var(--primary-color);
-      padding: 1.5rem;
-      width: 320px;
-      z-index: 998;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
-    .cart-panel.active {
-      display: block;
+    .map-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      loading: lazy;
     }
 
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-
-    .cart-item button {
-      background: var(--primary-color);
-      color: #000000;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
-
-    .cart-item button:hover {
-      background: #e6c200;
-    }
-
-    /* Back to Top */
-    .back-to-top {
+    /* Social Buttons */
+    .social-buttons {
       position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      background: var(--primary-color);
-      color: #000000;
-      padding: 1rem;
-      border-radius: 50%;
-      cursor: pointer;
-      display: none;
-      z-index: 999;
-      transition: all 0.3s ease;
-    }
-
-    .back-to-top:hover {
-      background: #e6c200;
-      transform: translateY(-3px);
-    }
-
-    /* Hotline */
-    .hotline {
-      position: fixed;
-      left: 2rem;
-      bottom: 2rem;
-      background: var(--primary-color);
-      color: #000000;
-      padding: 0.75rem 1.5rem;
-      border-radius: 50px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      z-index: 999;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    .hotline:hover {
-      background: #e6c200;
-    }
-
-    /* Social */
-    .social {
-      position: fixed;
-      bottom: 6rem;
-      right: 2rem;
+      right: 1.5rem;
+      bottom: 1.5rem;
       display: flex;
       flex-direction: column;
       gap: 1rem;
       z-index: 999;
     }
 
-    .social a {
-      background: #000000;
-      padding: 0.75rem;
-      border-radius: 50%;
-      color: var(--primary-color);
-      font-size: 1.25rem;
-      transition: all 0.3s ease;
-    }
-
-    .social a:hover {
-      background: var(--primary-color);
-      color: #000000;
-    }
-
-    /* Swiper */
-    .swiper {
-      padding-bottom: 3rem;
-    }
-
-    .swiper-slide {
-      display: flex;
-      justify-content: center;
-    }
-
-    .swiper-pagination-bullet-active {
-      background: var(--primary-color);
-    }
-
-    .swiper-button-prev,
-    .swiper-button-next {
-      color: var(--primary-color);
-      background: #000000;
-      border-radius: 50%;
-      width: 2.5rem;
-      height: 2.5rem;
+    .social-btn {
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .swiper-button-prev:hover,
-    .swiper-button-next:hover {
-      background: var(--primary-color);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, var(--primary-color), #e6c200);
       color: #000000;
-    }
-
-    /* News Card */
-    .news-card {
-      background: var(--accent-color);
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease;
-    }
-
-    .news-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .news-card.featured {
-      border: 2px solid var(--primary-color);
-    }
-
-    .news-card.featured::before {
-      content: 'Nổi bật';
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: var(--primary-color);
-      color: #000000;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      font-size: 0.875rem;
-      font-weight: 600;
-    }
-
-    .news-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-    }
-
-    .news-card h4 {
       font-size: 1.25rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(255, 215, 0, 0.5);
+      animation: none;
+    }
+
+    .social-btn.facebook {
+      background: #1877f2;
+      color: #ffffff;
+    }
+
+    .social-btn.zalo {
+      background: #0068ff;
+      color: #ffffff;
+    }
+
+    /* Hotline */
+    .hotline {
+      position: fixed;
+      left: 1.5rem;
+      bottom: 1.5rem;
+      background: linear-gradient(45deg, var(--primary-color), #e6c200);
+      color: #000000;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      z-index: 999;
       font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-
-    .news-card p {
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
       font-size: 0.875rem;
-      color: #cccccc;
-      margin-bottom: 1rem;
+      animation: pulse 2s infinite ease-in-out;
     }
 
-    .news-card a {
-      color: var(--primary-color);
-      font-weight: 500;
-      text-decoration: none;
-    }
-
-    .news-card a:hover {
-      color: #e6c200;
+    .hotline:hover {
+      background: linear-gradient(45deg, #e6c200, var(--primary-color));
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(255, 215, 0, 0.5);
+      animation: none;
     }
 
     /* Footer */
-    footer {
-      background: #1c1c1c;
+    .footer {
+      background: var(--accent-color);
       color: var(--text-color);
-      padding: 4rem 0;
+      padding: 3rem 0;
+      border-top: 1px solid #333;
     }
 
     .footer-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
     }
 
-    footer a {
+    .footer-grid > div {
+      text-align: left;
+    }
+
+    .footer a {
       color: var(--primary-color);
-      transition: color 0.3s ease;
+      font-size: 0.875rem;
+      transition: color 0.3s ease-in-out;
+      text-decoration: none;
     }
 
-    footer a:hover {
+    .footer a:hover {
       color: #e6c200;
     }
 
+    .footer p, .footer li {
+      font-size: 0.875rem;
+      color: var(--gray-color);
+      line-height: 1.5;
+    }
+
+    .footer h4 {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-copyright {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #333;
+    }
+
     /* Responsive */
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       .products {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+
+      .hero h1 {
+        font-size: clamp(1.75rem, 4vw, 3rem);
+      }
+
+      .hero p.price-highlight {
+        font-size: clamp(1.25rem, 3vw, 1.5rem);
+      }
+
+      .contact-grid {
         grid-template-columns: 1fr;
       }
 
-      .tabs {
-        flex-direction: column;
-        align-items: center;
+      .map-container {
+        margin-top: 2rem;
       }
 
-      .cart-panel {
-        width: 90%;
-        right: 5%;
+      .policy-grid {
+        grid-template-columns: 1fr;
       }
 
-      .contact-form input,
-      .contact-form textarea {
-        padding: 0.75rem;
-      }
-
-      .contact-form .icon {
-        display: none;
+      .policy-sidebar {
+        margin-top: 1.5rem;
       }
     }
-  </style>
+
+    @media (max-width: 768px) {
+      header {
+        height: 56px;
+      }
+
+      .nav-menu {
+        gap: 1rem;
+      }
+
+      .nav-menu a {
+        font-size: 0.75rem;
+      }
+
+      .hero {
+        min-height: 80vh;
+        padding-top: 56px;
+      }
+
+      .hero h1 {
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+      }
+
+      .hero p {
+        font-size: 0.875rem;
+      }
+
+      .products {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        padding: 0 0.5rem;
+      }
+
+      .product-card {
+        max-width: 220px;
+        padding: 1rem;
+      }
+
+      .product-card img {
+        height: 140px;
+      }
+
+      .tabs {
+        gap: 1rem;
+      }
+
+      .tab {
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+      }
+
+      .swiper-slide img {
+        height: 160px;
+      }
+
+      .hotline, .social-btn {
+        font-size: 0.75rem;
+        padding: 0.5rem;
+        bottom: 1rem;
+        left: 1rem;
+        width: 40px;
+        height: 40px;
+      }
+
+      .social-buttons {
+        right: 1rem;
+        bottom: 1rem;
+        gap: 0.75rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: clamp(1.25rem, 4vw, 2rem);
+      }
+
+      .hero p {
+        font-size: 0.75rem;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .product-card {
+        max-width: 100%;
+        padding: 1rem;
+      }
+
+      .product-card img {
+        height: 120px;
+      }
+
+      .btn {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.75rem;
+      }
+
+      .swiper-slide img {
+        height: 140px;
+      }
+
+      .hotline, .social-btn {
+        font-size: 0.7rem;
+        padding: 0.5rem;
+        bottom: 0.75rem;
+        left: 0.75rem;
+        width: 36px;
+        height: 36px;
+      }
+
+      .social-buttons {
+        right: 0.75rem;
+        bottom: 0.75rem;
+      }
+
+      .popup-content, .policy-content {
+        padding: 1.5rem;
+      }
+
+      .popup-content h3, .policy-content h3 {
+        font-size: clamp(1.25rem, 3vw, 1.5rem);
+      }
+
+      .popup-content p, .popup-content ul, .policy-content p {
+        font-size: 0.875rem;
+      }
+
+      .popup-content img {
+        max-width: 250px;
+      }
+    }
+  
+.cart-item {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  border-bottom: 1px solid #333;
+  padding-bottom: 1rem;
+}
+.cart-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.cart-item-info {
+  flex-grow: 1;
+}
+.cart-item-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup.active {
+  display: flex;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  max-height: 90vh;
+  overflow-y: auto;
+  width: 90%;
+  max-width: 600px;
+  z-index: 10000;
+}
+
+.btn-main {
+  background-color: #facc15;
+  color: #000;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.z-\[999\] {
+  z-index: 999 !important;
+}
+
+/* Đảm bảo header không che popup */
+header, .header, .site-header {
+    z-index: 1000 !important;
+    position: relative;
+}
+
+/* Đảm bảo popup luôn trên top */
+.popup {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 9999 !important;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup.active {
+    display: flex !important;
+}
+
+.popup-content {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 10000 !important;
+}
+</style>
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div class="container header-content">
-      <div class="logo">
-        <img src="https://8sangbds.com/logo.png" alt="8 Sang BDS Logo">
-      </div>
-      <nav class="nav-menu">
-        <a href="#products">Sản phẩm</a>
-        <a href="#contact">Liên hệ</a>
-        <a href="#news">Tin tức</a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="hero" style="background-image: url('images/1466x460.jpg');">
-    <div class="container">
-      <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-        <h1>Thảo Dược 8 Sang BDS</h1>
-        <p>An toàn – Hiệu quả – Thiên nhiên</p>
-        <p class="price-highlight">Dầu Hít 8S: 139.000đ – Mua 5 tặng 1</p>
-        <a href="#products" class="btn-main btn-pulse">Khám phá sản phẩm</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Products Section -->
-  <section id="products" class="bg-[var(--bg-color)]">
-    <div class="container">
-      <div class="text-center mb-12" data-aos="fade-up">
-        <h2 class="text-2.5rem text-[var(--primary-color)]">Sản phẩm nổi bật</h2>
-        <p class="text-gray-400 mt-2">Thảo dược 8S - Chăm sóc sức khỏe từ thiên nhiên</p>
-      </div>
-
-      <div class="tabs">
-        <div class="tab" onclick="showTab('cao-xoa-bop', this)">Cao Xoa Bóp</div>
-        <div class="tab" onclick="showTab('vien-uong', this)">Viên Uống</div>
-        <div class="tab active" onclick="showTab('dau-hit', this)">Dầu Hít</div>
-      </div>
-
-      <div id="dau-hit" class="tab-content active">
-        <div class="products">
-          <div class="product-card" data-aos="fade-up" data-aos-delay="100">
-            <div class="badge">Giảm giá</div>
-            <img src="images/dauhit011.jpg" alt="Dầu hít 8S 1 chai">
-            <p><strong>Dầu Hít Thảo Dược 8S</strong></p>
-            <p class="price">139.000đ <span class="old-price">199.000đ</span></p>
-            <div class="btns">
-              <button class="add-cart btn-main" onclick="addToCart('Dầu Hít Thảo Dược 8S', 139000)">Thêm vào giỏ</button>
-              <button class="buy-now btn-buy-now" onclick="openPopup('Dầu Hít Thảo Dược 8S')">Mua ngay</button>
-            </div>
-          </div>
-          <div class="product-card" data-aos="fade-up" data-aos-delay="200">
-            <img src="images/5tang1dauhit.jpg" alt="Dầu hít mua 5 tặng 1">
-            <p><strong>Dầu hít mua 5 tặng 1</strong></p>
-            <p class="price">695.000đ</p>
-            <div class="btns">
-              <button class="add-cart btn-main" onclick="addToCart('Combo Dầu Hít 5+1', 695000)">Thêm vào giỏ</button>
-              <button class="buy-now btn-buy-now" onclick="openPopup('Combo Dầu Hít 5+1')">Mua ngay</button>
-            </div>
-          </div>
-          <div class="product-card" data-aos="fade-up" data-aos-delay="300">
-            <img src="images/mua10tang3dauhit.jpg" alt="Dầu hít mua 10 tặng 3">
-            <p><strong>Mua 10 tặng 3</strong></p>
-            <p class="price">1.390.000đ</p>
-            <div class="btns">
-              <button class="add-cart btn-main" onclick="addToCart('Combo Dầu Hít 10+3', 1390000)">Thêm vào giỏ</button>
-              <button class="buy-now btn-buy-now" onclick="openPopup('Combo Dầu Hít 10+3')">Mua ngay</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="cao-xoa-bop" class="tab-content">
-        <div class="products">
-          <div class="product-card" data-aos="fade-up" data-aos-delay="100">
-            <img src="img/cao1.png" alt="Cao xoa bóp chai nhôm">
-            <p><strong>Cao xoa bóp chai nhôm</strong></p>
-            <p class="price">239.000đ</p>
-            <div class="btns">
-              <button class="add-cart btn-main" onclick="addToCart('Cao xoa bóp 1 chai', 239000)">Thêm vào giỏ</button>
-              <button class="buy-now btn-buy-now" onclick="openPopup('Cao xoa bóp 1 chai')">Mua ngay</button>
-            </div>
-          </div>
-          <div class="product-card" data-aos="fade-up" data-aos-delay="200">
-            <div class="badge">Giảm giá</div>
-            <img src="img/cao2.png" alt="Cao xoa bóp combo 3 tặng 1">
-            <p><strong>Combo 3 tặng 1</strong></p>
-            <p class="price">717.000đ <span class="old-price">956.000đ</span></p>
-            <div class="btns">
-              <button class="add-cart btn-main" onclick="addToCart('Combo Cao xoa bóp 3+1', 717000)">Thêm vào giỏ</button>
-              <button class="buy-now btn-buy-now" onclick="openPopup('Combo Cao xoa bóp 3+1')">Mua ngay</button>
-            </div>
-          </div>
-          <div class="product-card" data-aos="fade-up" data-aos-delay="300">
-            <img src="images/5tang1dauhit.jpg" alt="Dầu hít mua 5 tặng 1">
-            <p><strong>Dầu hít mua 5 tặng 1</strong></p>
-            <p class="price">695.000đ</p>
-            <div class="btns">
-              <button class="add-cart btn-main" onclick="addToCart('Combo Dầu Hít 5+1', 695000)">Thêm vào giỏ</button>
-              <button class="buy-now btn-buy-now" onclick="openPopup('Combo Dầu Hít 5+1')">Mua ngay</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="vien-uong" class="tab-content">
-        <div class="products">
-          <div class="product-card" data-aos="fade-up" data-aos-delay="100">
-            <img src="img/vien1.png" alt="Viên uống 8S">
-            <p><strong>Viên uống thảo dược 8S</strong></p>
-            <p class="price">299.000đ</p>
-            <div class="btns">
-              <button class="add-cart btn-main" onclick="addToCart('Viên Uống Thảo Dược 8S', 299000)">Thêm vào giỏ</button>
-              <button class="buy-now btn-buy-now" onclick="openPopup('Viên Uống Thảo Dược 8S')">Mua ngay</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Video Section -->
-  <section class="bg-[var(--accent-color)] text-center">
-    <div class="container">
-      <h2 class="text-2.5rem text-[var(--primary-color)]" data-aos="fade-up">Video giới thiệu sản phẩm</h2>
-      <iframe class="mx-auto rounded-xl shadow-lg" width="800" height="450" src="https://www.youtube.com/embed/sqOTaA_QyLc" title="YouTube video" allowfullscreen data-aos="fade-up" data-aos-delay="200"></iframe>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="bg-[var(--bg-color)]">
-    <div class="container">
-      <div class="max-w-2xl mx-auto" data-aos="fade-up">
-        <h2 class="text-2.5rem text-center text-[var(--primary-color)]">Liên hệ với chúng tôi</h2>
-        <p class="text-center text-gray-400 mb-8">Hãy để lại thông tin, chúng tôi sẽ liên hệ ngay!</p>
-        <form class="contact-form">
-          <div class="input-wrapper">
-            <i class="fas fa-user icon"></i>
-            <input type="text" name="name" placeholder="Họ và tên" required>
-          </div>
-          <div class="input-wrapper">
-            <i class="fas fa-envelope icon"></i>
-            <input type="email" name="email" placeholder="Email" required>
-          </div>
-          <div class="input-wrapper">
-            <i class="fas fa-phone icon"></i>
-            <input type="tel" name="phone" placeholder="Số điện thoại" required>
-          </div>
-          <div class="input-wrapper">
-            <textarea name="message" rows="5" placeholder="Tin nhắn của bạn" required></textarea>
-          </div>
-          <button type="submit" class="btn-main">Gửi liên hệ</button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- News Section -->
-  <section id="news" class="bg-[var(--bg-color)]">
-    <div class="container">
-      <h2 class="text-2.5rem text-center text-[var(--primary-color)] mb-12" data-aos="fade-up">Tin tức mới nhất</h2>
-      <div class="swiper">
-        <div class="swiper-wrapper" id="rss-news"></div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-      </div>
-      <div class="text-center mt-8">
-        <a href="https://caoxoabopthaoduoc8s.vn/tin-tuc" target="_blank" class="btn-main">Xem thêm</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <img src="https://8sangbds.com/logo.png" alt="8 Sang BDS Logo" style="max-width: 150px; margin-bottom: 1rem;">
-          <h3>CÔNG TY TNHH 8 SANG BDS - "Vì sức khỏe mọi nhà"</h3>
-          <p>Giấy chứng nhận đăng ký doanh nghiệp số: 0316897403. Nơi cấp: Phòng đăng ký kinh doanh – Sở Kế hoạch và Đầu tư TP.HCM cấp lần đầu ngày 09/06/2021; cấp thay đổi lần thứ 1 ngày 01/12/2021.</p>
-          <div class="flex gap-4 mt-4">
-            <a href="https://www.facebook.com/8sangbds"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://zalo.me/1900888663"><i class="fas fa-comment"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-          </div>
-        </div>
-        <div>
-          <h4>Thông tin công ty</h4>
-          <p>Trụ sở chính: 218 Tên Lửa, phường Bình Trị Đông B, quận Bình Tân, TP. Hồ Chí Minh</p>
-          <p>Địa chỉ liên hệ: 218 Tên Lửa, phường Bình Trị Đông B, quận Bình Tân, TP. Hồ Chí Minh</p>
-          <p><strong>Hotline:</strong> <a href="tel:1900888663">1900888663</a></p>
-          <p>Mua hàng: <a href="tel:0818299606">0818299606</a> - CSKH: <a href="tel:0938756005">0938.756.005</a></p>
-          <p>Email: <a href="/cdn-cgi/l/email-protection#255d16040b02070116250208040c094b060a08"><span class="__cf_email__" data-cfemail="5b63283a353c393f281b3c363a323775383436">[email protected]</span></a></p>
-          <p>MST: 0316897403</p>
-        </div>
-        <div>
-          <h4>Quy định và chính sách</h4>
-          <ul style="list-style: none; padding: 0;">
-            <li><a href="#">Giới thiệu</a></li>
-            <li><a href="#">Điều khoản chung</a></li>
-            <li><a href="#">Chính sách bảo mật</a></li>
-            <li><a href="#">Phương thức thanh toán</a></li>
-            <li><a href="#">Theo dõi đơn hàng</a></li>
-            <li><a href="#">Phương thức hoàn tiền</a></li>
-            <li><a href="#">Bảo vệ thông tin cá nhân</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Fanpage</h4>
-          <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F8sangbds&tabs=timeline&width=250&height=160&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true" width="250" height="160" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>
-        </div>
-      </div>
-      <div class="text-center mt-8 pt-8 border-t border-gray-700">© 2025 CÔNG TY TNHH 8 SANG BDS</div>
-    </div>
-  </footer>
-
-  <!-- Hotline -->
-  <div class="hotline"><i class="fas fa-phone-alt"></i> 1900 888 663</div>
-
-  <!-- Social -->
-  <div class="social">
-    <a href="https://zalo.me/2368661726434406455" target="_blank"><img src="https://stc-zaloprofile.zdn.vn/pc/v1/images/zalo_sharelogo.png" width="32" alt="Zalo"></a>
-    <a href="https://m.me/your_facebook_page" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Facebook_Messenger_4_Logo.svg" width="32" alt="Messenger"></a>
+<!-- Header -->
+<header>
+<div class="header-content">
+<div class="logo">
+<img alt="8 Sang BDS Logo" loading="lazy" src="https://via.placeholder.com/120x40?text=8+Sang+BDS+Logo"/>
+</div>
+<nav class="nav-menu">
+<a class="nav-link" href="#products">Sản phẩm</a>
+<a class="nav-link" href="#video">Video</a>
+<a class="nav-link" href="#news">Tin tức</a>
+<a class="nav-link" href="#contact">Liên hệ</a>
+</nav>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="hero" style="background-image: url('https://via.placeholder.com/1920x1080?text=Hero+Image');">
+<div class="container">
+<div class="hero-content" data-aos="fade-up" data-aos-duration="800">
+<h1 data-aos="zoom-in" data-aos-delay="100">Thảo Dược 8 Sang BDS</h1>
+<p data-aos="fade-up" data-aos-delay="200">Sức khỏe từ thiên nhiên – Sang trọng như phong cách sống</p>
+<p class="price-highlight" data-aos="fade-up" data-aos-delay="300">Cao Xoa Bóp: 169.000đ – Mua 5 tặng 1</p>
+<a class="btn btn-main btn-pulse nav-link" data-aos="fade-up" data-aos-delay="400" href="#products">Khám phá ngay</a>
+</div>
+</div>
+</section>
+<!-- Products Section -->
+<section id="products">
+<div class="container">
+<div class="text-center mb-12" data-aos="fade-up">
+<h2 class="text-[clamp(2rem,5vw,3rem)] text-[var(--primary-color)]">Sản phẩm nổi bật</h2>
+<p class="text-[var(--gray-color)] mt-2 text-[1rem]">Chăm sóc sức khỏe với thảo dược thiên nhiên</p>
+</div>
+<div class="tabs" data-aos="fade-up" data-aos-delay="100">
+<div class="tab active" onclick="showTab('cao-xoa-bop', this)">Cao Xoa Bóp</div>
+<div class="tab" onclick="showTab('dau-hit', this)">Dầu Hít</div>
+<div class="tab" onclick="showTab('vien-uong', this)">Viên Uống</div>
+</div>
+<div class="tab-content active" id="cao-xoa-bop">
+<div class="products">
+<div class="product-card" data-aos="fade-up" data-aos-delay="100">
+<div class="badge">Mới</div>
+<img alt="1 chai Cao Xoa Bóp Thảo Dược 8S (50ml)" loading="lazy" onclick="openProductPopup('cao-xoa-bop-1')" src="https://via.placeholder.com/300x160?text=Cao+Xoa+Bóp+1+Chai"/>
+<p><strong onclick="openProductPopup('cao-xoa-bop-1')">1 chai Cao Xoa Bóp Thảo Dược 8S (50ml)</strong></p>
+<p class="price">169.000đ</p>
+<div class="btns">
+<button class="btn btn-main btn-pulse" onclick="addToCart('Cao Xoa Bóp 1 chai', 169000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Cao Xoa Bóp 1 chai')">Mua ngay</button>
+</div>
+</div>
+<div class="product-card" data-aos="fade-up" data-aos-delay="200">
+<div class="badge">Giảm giá</div>
+<img alt="Mua 5 Chai Tặng 1 Cao" loading="lazy" onclick="openProductPopup('cao-xoa-bop-5')" src="https://via.placeholder.com/300x160?text=Cao+Xoa+Bóp+Combo+5+1"/>
+<p><strong onclick="openProductPopup('cao-xoa-bop-5')">Mua 5 Chai Tặng 1 Cao</strong></p>
+<p class="price">845.000đ <span class="old-price">1.014.000đ</span></p>
+<div class="btns">
+<button class="btn btn-main btn-pulse" onclick="addToCart('Mua 5 Chai Tặng 1 Cao', 845000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Mua 5 Chai Tặng 1 Cao')">Mua ngay</button>
+</div>
+</div>
+<div class="product-card" data-aos="fade-up" data-aos-delay="300">
+<div class="badge">Ưu đãi</div>
+<img alt="Combo 3 Chai Cao Xoa Bóp" loading="lazy" onclick="openProductPopup('cao-xoa-bop-3')" src="https://via.placeholder.com/300x160?text=Cao+Xoa+Bóp+Combo+3"/>
+<p><strong onclick="openProductPopup('cao-xoa-bop-3')">Combo 3 Chai Cao Xoa Bóp</strong></p>
+<p class="price">499.000đ <span class="old-price">507.000đ</span></p>
+<div class="btns">
+<button class="btn btn-main btn-pulse" onclick="addToCart('Combo 3 Chai Cao Xoa Bóp', 499000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Combo 3 Chai Cao Xoa Bóp')">Mua ngay</button>
+</div>
+</div>
+</div>
+</div>
+<div class="tab-content" id="dau-hit">
+<div class="products">
+<div class="product-card" data-aos="fade-up" data-aos-delay="100">
+<div class="badge">Giảm giá</div>
+<img alt="Dầu Hít Thảo Dược 8S (1 chai)" loading="lazy" onclick="openProductPopup('dau-hit-1')" src="https://via.placeholder.com/300x160?text=Dầu+Hít+1+Chai"/>
+<p><strong onclick="openProductPopup('dau-hit-1')">Dầu Hít Thảo Dược 8S (1 chai)</strong></p>
+<p class="price">130.000đ <span class="old-price">199.000đ</span></p>
+<div class="btns">
+<button class="btn btn-main btn-pulse" onclick="addToCart('Dầu Hít Thảo Dược 8S (1 chai)', 130000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Dầu Hít Thảo Dược 8S (1 chai)')">Mua ngay</button>
+</div>
+</div>
+<div class="product-card" data-aos="fade-up" data-aos-delay="200">
+<div class="badge">Mới</div>
+<img alt="Dầu Hít Combo 3 Chai" loading="lazy" onclick="openProductPopup('dau-hit-3')" src="https://via.placeholder.com/300x160?text=Dầu+Hít+Combo+3"/>
+<p><strong onclick="openProductPopup('dau-hit-3')">Dầu Hít Thảo Dược 8S (Combo 3 Chai)</strong></p>
+<p class="price">360.000đ <span class="old-price">390.000đ</span></p>
+<div class="btns">
+<button class="btn btn-main btn-pulse" onclick="addToCart('Dầu Hít Combo 3 Chai', 360000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Dầu Hít Combo 3 Chai')">Mua ngay</button>
+</div>
+</div>
+<div class="product-card" data-aos="fade-up" data-aos-delay="300">
+<div class="badge">Ưu đãi</div>
+<img alt="Dầu Hít Combo 5 Chai" loading="lazy" onclick="openProductPopup('dau-hit-5')" src="https://via.placeholder.com/300x160?text=Dầu+Hít+Combo+5"/>
+<p><strong onclick="openProductPopup('dau-hit-5')">Dầu Hít Thảo Dược 8S (Combo 5 Chai)</strong></p>
+<p class="price">600.000đ <span class="old-price">650.000đ</span></p>
+<div class="btns">
+<button class="btn btn-main btn-pulse" onclick="addToCart('Dầu Hít Combo 5 Chai', 600000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Dầu Hít Combo 5 Chai')">Mua ngay</button>
+</div>
+</div>
+</div>
+</div>
+<div class="tab-content" id="vien-uong">
+<div class="products">
+<div class="product-card" data-aos="fade-up" data-aos-delay="100">
+<div class="badge">Mới</div>
+<img alt="1 hộp Viên Uống Xương Khớp Thảo Dược 8S" loading="lazy" onclick="openProductPopup('vien-uong-1')" src="https://via.placeholder.com/300x160?text=Viên+Uống+1+Hộp"/>
+<p><strong onclick="openProductPopup('vien-uong-1')">1 hộp Viên Uống Xương Khớp Thảo Dược 8S</strong></p>
+<p class="price">399.000đ</p>
+<div class="btns">
+<button class="btn btn-main btn-pulse" onclick="addToCart('Viên Uống Xương Khớp Thảo Dược 8S (1 hộp)', 399000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Viên Uống Xương Khớp Thảo Dược 8S (1 hộp)')">Mua ngay</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Video Section -->
+<section class="video-section" id="video">
+<div class="container">
+<div class="text-center mb-12" data-aos="fade-up">
+<h2 class="text-[clamp(2rem,5vw,3rem)] text-[var(--primary-color)]">Video giới thiệu</h2>
+<p class="text-[var(--gray-color)] mt-2 text-[1rem]">Khám phá sản phẩm 8S qua video</p>
+</div>
+<div class="video-container" data-aos="fade-up" data-aos-delay="100">
+<iframe allowfullscreen="" loading="lazy" src="https://www.youtube.com/embed/sqOTaA_QyLc" title="Video giới thiệu sản phẩm"></iframe>
+</div>
+</div>
+</section>
+<!-- News Section -->
+<section class="news-section" id="news">
+<div class="container">
+<div class="text-center mb-12" data-aos="fade-up">
+<h2 class="text-[clamp(2rem,5vw,3rem)] text-[var(--primary-color)]">Tin tức mới nhất</h2>
+<p class="text-[var(--gray-color)] mt-2 text-[1rem]">Cập nhật thông tin về sức khỏe và sản phẩm</p>
+</div>
+<div class="swiper-container" data-aos="fade-up" data-aos-delay="100">
+<div class="swiper-wrapper">
+<div class="swiper-slide">
+<img alt="Tin tức 1" loading="lazy" src="https://via.placeholder.com/400x200?text=Tin+tức+1"/>
+<h3>Lợi ích của thảo dược trong chăm sóc sức khỏe</h3>
+<p>Khám phá cách các loại thảo dược thiên nhiên hỗ trợ giảm đau nhức và cải thiện sức khỏe tổng thể.</p>
+<a class="btn btn-buy-now" href="#">Đọc thêm</a>
+</div>
+<div class="swiper-slide">
+<img alt="Tin tức 2" loading="lazy" src="https://via.placeholder.com/400x200?text=Tin+tức+2"/>
+<h3>Cao Xoa Bóp 8S – Bí quyết giảm đau hiệu quả</h3>
+<p>Tìm hiểu cách Cao Xoa Bóp Thảo Dược 8S giúp giảm đau nhức cơ khớp chỉ sau vài lần sử dụng.</p>
+<a class="btn btn-buy-now" href="#">Đọc thêm</a>
+</div>
+<div class="swiper-slide">
+<img alt="Tin tức 3" loading="lazy" src="https://via.placeholder.com/400x200?text=Tin+tức+3"/>
+<h3>Dầu Hít 8S – Đồng hành cùng hơi thở</h3>
+<p>Hỗ trợ thông mũi, giảm nghẹt với tinh dầu tự nhiên từ Dầu Hít Thảo Dược 8S.</p>
+<a class="btn btn-buy-now" href="#">Đọc thêm</a>
+</div>
+</div>
+<div class="swiper-pagination"></div>
+<div class="swiper-button-prev"></div>
+<div class="swiper-button-next"></div>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section id="contact">
+<div class="container">
+<div class="text-center mb-12" data-aos="fade-up">
+<h2 class="text-[clamp(2rem,5vw,3rem)] text-[var(--primary-color)]">Liên hệ ngay</h2>
+<p class="text-[var(--gray-color)] mt-2 text-[1rem]">Hỗ trợ bạn mọi lúc, mọi nơi</p>
+</div>
+<div class="contact-grid" data-aos="fade-up" data-aos-delay="100">
+<div class="contact-form">
+<div class="input-group">
+<i class="fas fa-user"></i>
+<input placeholder="Họ và tên" required="" type="text"/>
+</div>
+<div class="input-group">
+<i class="fas fa-phone"></i>
+<input placeholder="Số điện thoại" required="" type="tel"/>
+</div>
+<div class="input-group">
+<textarea placeholder="Tin nhắn của bạn" required="" rows="4"></textarea>
+</div>
+<button class="btn btn-main btn-pulse w-full">Gửi liên hệ</button>
+</div>
+<div class="map-container">
+<iframe allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.447!2d106.61280431526367!3d10.743056162321444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b7c3ed289%3A0xa06651894598e488!2s218%20T%C3%AAn%20L%E1%BB%ADa%2C%20B%C3%ACnh%20Tr%E1%BB%8B%20%C4%90%C3%B4ng%20B%2C%20B%C3%ACnh%20T%C3%A2n%2C%20H%E1%BB%93%20Ch%C3%AD%20Minh%2C%20Vietnam!5e0!3m2!1sen!2s!4v1698765432109!5m2!1sen!2s"></iframe>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<!-- FOOTER GIỐNG 8SANGBDS.COM -->
+<!-- Footer -->
+&lt;<!-- Footer -->
+<footer class="footer">
+<div class="footer-grid">
+<!-- Cột 1: Logo + Giới thiệu -->
+<div data-aos="fade-up" data-aos-delay="100">
+<img alt="8 Sang BDS Logo" class="hover:scale-105" loading="lazy" src="https://via.placeholder.com/160x40?text=8+Sang+BDS+Logo" style="max-width: 160px; margin-bottom: 1rem; transition: transform 0.3s ease-in-out;"/>
+<p class="font-bold text-[var(--primary-color)] mb-2">CÔNG TY TNHH 8 SANG BDS</p>
+<p class="text-[var(--gray-color)] text-sm">Giấy chứng nhận đăng ký doanh nghiệp số: 0316897403. Nơi cấp: Phòng Đăng ký kinh doanh – Sở Kế hoạch và Đầu tư TP. HCM, cấp lần đầu ngày 09/06/2021; cấp thay đổi lần thứ 1 ngày 01/12/2021.</p>
+<div class="mt-4 flex gap-3">
+<a class="text-[var(--primary-color)] transition-colors duration-300 hover:text-[#e6c200]" href="https://www.facebook.com/8sangbds" target="_blank">
+<i class="fab fa-facebook-f"></i>
+</a>
+<a class="text-[var(--primary-color)] transition-colors duration-300 hover:text-[#e6c200]" href="https://www.youtube.com/@8sangbds" target="_blank">
+<i class="fab fa-youtube"></i>
+</a>
+<a class="text-[var(--primary-color)] transition-colors duration-300 hover:text-[#e6c200]" href="https://www.tiktok.com/@8sangbds" target="_blank">
+<i class="fab fa-tiktok"></i>
+</a>
+</div>
+</div>
+<!-- Cột 2: Thông tin công ty -->
+<div data-aos="fade-up" data-aos-delay="200">
+<h4 class="text-[var(--primary-color)] mb-3">Thông tin công ty</h4>
+<p class="text-[var(--gray-color)] text-sm mb-2">Trụ sở chính: 218 Tên Lửa, P. Bình Trị Đông B, Q. Bình Tân, TP. Hồ Chí Minh</p>
+<p class="text-[var(--gray-color)] text-sm mb-2">Địa chỉ liên hệ: 218 Tên Lửa, P. Bình Trị Đông B, Q. Bình Tân, TP. Hồ Chí Minh</p>
+<p class="text-sm mb-2">Hotline: <a class="text-[var(--primary-color)] font-bold hover:text-[#e6c200] transition-colors duration-300" href="tel:1900888663">1900888663</a></p>
+<p class="text-sm mb-2">Mua hàng: <a class="text-[var(--primary-color)] hover:text-[#e6c200] transition-colors duration-300" href="tel:0818299606">0818299606</a> - CSKH: <a class="text-[var(--primary-color)] hover:text-[#e6c200] transition-colors duration-300" href="tel:0938756005">0938.756.005</a></p>
+<p class="text-sm">Email: <a class="text-[var(--primary-color)] hover:text-[#e6c200] transition-colors duration-300" href="mailto:info@8sangbds.com">info@8sangbds.com</a></p>
+<p class="text-[var(--gray-color)] text-sm">MST: 0316897403</p>
+</div>
+<!-- Cột 3: Quy định & Chính sách -->
+<div data-aos="fade-up" data-aos-delay="300">
+<h4 class="text-[var(--primary-color)] mb-3">Quy định &amp; chính sách</h4>
+<ul class="list-none p-0 m-0 text-sm">
+<li><a class="text-[var(--gray-color)] hover:text-[var(--primary-color)] transition-colors duration-300" href="#">Giới thiệu</a></li>
+<li><a class="text-[var(--gray-color)] hover:text-[var(--primary-color)] transition-colors duration-300" href="#">Điều khoản</a></li>
+<li><a class="text-[var(--gray-color)] hover:text-[var(--primary-color)] transition-colors duration-300" href="#">Chính sách bảo mật</a></li>
+<li><a class="text-[var(--gray-color)] hover:text-[var(--primary-color)] transition-colors duration-300" href="#">Phương thức thanh toán</a></li>
+<li><a class="text-[var(--gray-color)] hover:text-[var(--primary-color)] transition-colors duration-300" href="#">Theo dõi đơn hàng</a></li>
+<li><a class="text-[var(--gray-color)] hover:text-[var(--primary-color)] transition-colors duration-300" href="#">Phương thức hoàn tiền</a></li>
+<li><a class="text-[var(--gray-color)] hover:text-[var(--primary-color)] transition-colors duration-300" href="#">Chính sách bảo vệ người tiêu dùng</a></li>
+</ul>
+</div>
+<!-- Cột 4: Fanpage -->
+<div data-aos="fade-up" data-aos-delay="400">
+<h4 class="text-[var(--primary-color)] mb-3">Fanpage</h4>
+<div class="relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
+<iframe allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen="true" frameborder="0" height="214" loading="lazy" scrolling="no" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F8sangbds&amp;tabs&amp;width=300&amp;height=214&amp;small_header=false&amp;adapt_container_width=true&amp;hide_cover=false&amp;show_facepile=true" style="border:none;overflow:hidden" width="300">
+</iframe>
+</div>
+<div class="mt-3 flex gap-2 justify-center">
+<img alt="Đã thông báo" loading="lazy" src="https://via.placeholder.com/70x35?text=Đã+thông+báo" style="height: 35px;"/>
+<img alt="DMCA" loading="lazy" src="https://via.placeholder.com/70x35?text=DMCA" style="height: 35px;"/>
+</div>
+</div>
+</div>
+<div class="footer-copyright">
+<p class="text-[var(--gray-color)] text-sm">© 2025 Công Ty TNHH 8 SANG BDS. All rights reserved.</p>
+</div>
+</footer>
+<!-- Hotline -->
+<div class="hotline btn-pulse" onclick="window.location.href='tel:1900888663'">
+<i class="fas fa-phone-alt"></i> 1900 888 663
   </div>
+<!-- Social Buttons -->
+<div class="social-buttons">
+<div class="social-btn facebook btn-pulse" onclick="openFacebookChat()">
+<i class="fab fa-facebook-f"></i>
+</div>
+<div class="social-btn zalo btn-pulse" onclick="openZaloChat()">
+<i class="fas fa-comment"></i>
+</div>
+</div>
+<!-- Product Popups -->
+<div class="popup" id="product-popup-cao-xoa-bop-1">
+<div class="popup-content">
+<h3>1 chai Cao Xoa Bóp Thảo Dược 8S (50ml)</h3>
+<img alt="Cao Xoa Bóp 1 Chai" loading="lazy" src="https://via.placeholder.com/300x200?text=Cao+Xoa+Bóp+1+Chai"/>
+<p><strong>Giá:</strong> 169.000đ</p>
+<p><strong>Mô tả:</strong> Cao Xoa Bóp Thảo Dược 8S được chiết xuất từ các loại thảo dược thiên nhiên, mang đến giải pháp giảm đau nhức và thư giãn cơ bắp hiệu quả.</p>
+<p><strong>Công dụng:</strong></p>
+<ul>
+<li>Giảm đau nhức cơ, khớp và mỏi lưng.</li>
+<li>Hỗ trợ thư giãn cơ bắp sau vận động mạnh.</li>
+<li>Cải thiện tuần hoàn máu, giảm tê bì.</li>
+</ul>
+<button class="btn btn-main btn-pulse" onclick="addToCart('Cao Xoa Bóp 1 chai', 169000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Cao Xoa Bóp 1 chai')">Mua ngay</button>
+<button class="btn btn-close mt-2" onclick="closeProductPopup('cao-xoa-bop-1')">Đóng</button>
+</div>
+</div>
+<div class="popup" id="product-popup-cao-xoa-bop-5">
+<div class="popup-content">
+<h3>Mua 5 Chai Tặng 1 Cao</h3>
+<img alt="Mua 5 Chai Tặng 1 Cao" loading="lazy" src="https://via.placeholder.com/300x200?text=Cao+Xoa+Bóp+Combo+5+1"/>
+<p><strong>Giá:</strong> 845.000đ <span class="old-price">1.014.000đ</span></p>
+<p><strong>Mô tả:</strong> Combo ưu đãi 5+1 chai Cao Xoa Bóp, tối ưu chi phí cho sử dụng lâu dài, giúp giảm đau nhức và chăm sóc sức khỏe toàn diện.</p>
+<p><strong>Công dụng:</strong></p>
+<ul>
+<li>Giảm đau nhức cơ, khớp và mỏi lưng.</li>
+<li>Hỗ trợ thư giãn cơ bắp sau vận động mạnh.</li>
+<li>Cải thiện tuần hoàn máu, giảm tê bì.</li>
+</ul>
+<button class="btn btn-main btn-pulse" onclick="addToCart('Mua 5 Chai Tặng 1 Cao', 845000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Mua 5 Chai Tặng 1 Cao')">Mua ngay</button>
+<button class="btn btn-close mt-2" onclick="closeProductPopup('cao-xoa-bop-5')">Đóng</button>
+</div>
+</div>
+<div class="popup" id="product-popup-cao-xoa-bop-3">
+<div class="popup-content">
+<h3>Combo 3 Chai Cao Xoa Bóp</h3>
+<img alt="Combo 3 Chai Cao Xoa Bóp" loading="lazy" src="https://via.placeholder.com/300x200?text=Cao+Xoa+Bóp+Combo+3"/>
+<p><strong>Giá:</strong> 499.000đ <span class="old-price">507.000đ</span></p>
+<p><strong>Mô tả:</strong> Combo 3 chai Cao Xoa Bóp, lý tưởng cho gia đình, giúp giảm đau nhức hiệu quả với chiết xuất thảo dược tự nhiên.</p>
+<p><strong>Công dụng:</strong></p>
+<ul>
+<li>Giảm đau nhức cơ, khớp và mỏi lưng.</li>
+<li>Hỗ trợ thư giãn cơ bắp sau vận động mạnh.</li>
+<li>Cải thiện tuần hoàn máu.</li>
+</ul>
+<button class="btn btn-main btn-pulse" onclick="addToCart('Combo 3 Chai Cao Xoa Bóp', 499000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Combo 3 Chai Cao Xoa Bóp')">Mua ngay</button>
+<button class="btn btn-close mt-2" onclick="closeProductPopup('cao-xoa-bop-3')">Đóng</button>
+</div>
+</div>
+<div class="popup" id="product-popup-dau-hit-1">
+<div class="popup-content">
+<h3>Dầu Hít Thảo Dược 8S (1 chai)</h3>
+<img alt="Dầu Hít Thảo Dược 8S (1 chai)" loading="lazy" src="https://via.placeholder.com/300x200?text=Dầu+Hít+1+Chai"/>
+<p><strong>Giá:</strong> 130.000đ <span class="old-price">199.000đ</span></p>
+<p><strong>Mô tả:</strong> Dầu Hít Thảo Dược 8S với tinh dầu tự nhiên, giúp thông mũi, giảm nghẹt và mang lại cảm giác sảng khoái tức thì.</p>
+<p><strong>Công dụng:</strong></p>
+<ul>
+<li>Thông mũi, giảm nghẹt mũi hiệu quả.</li>
+<li>Giảm đau đầu, mệt mỏi do cảm cúm.</li>
+<li>Mang lại cảm giác sảng khoái.</li>
+</ul>
+<button class="btn btn-main btn-pulse" onclick="addToCart('Dầu Hít Thảo Dược 8S (1 chai)', 130000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Dầu Hít Thảo Dược 8S (1 chai)')">Mua ngay</button>
+<button class="btn btn-close mt-2" onclick="closeProductPopup('dau-hit-1')">Đóng</button>
+</div>
+</div>
+<div class="popup" id="product-popup-dau-hit-3">
+<div class="popup-content">
+<h3>Dầu Hít Thảo Dược 8S (Combo 3 Chai)</h3>
+<img alt="Dầu Hít Combo 3 Chai" loading="lazy" src="https://via.placeholder.com/300x200?text=Dầu+Hít+Combo+3"/>
+<p><strong>Giá:</strong> 360.000đ <span class="old-price">390.000đ</span></p>
+<p><strong>Mô tả:</strong> Combo 3 chai Dầu Hít, tiện lợi cho sử dụng lâu dài, mang lại cảm giác sảng khoái và hỗ trợ hô hấp.</p>
+<p><strong>Công dụng:</strong></p>
+<ul>
+<li>Thông mũi, giảm nghẹt mũi hiệu quả.</li>
+<li>Giảm đau đầu, mệt mỏi do cảm cúm.</li>
+<li>Mang lại cảm giác sảng khoái.</li>
+</ul>
+<button class="btn btn-main btn-pulse" onclick="addToCart('Dầu Hít Combo 3 Chai', 360000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Dầu Hít Combo 3 Chai')">Mua ngay</button>
+<button class="btn btn-close mt-2" onclick="closeProductPopup('dau-hit-3')">Đóng</button>
+</div>
+</div>
+<div class="popup" id="product-popup-dau-hit-5">
+<div class="popup-content">
+<h3>Dầu Hít Thảo Dược 8S (Combo 5 Chai)</h3>
+<img alt="Dầu Hít Combo 5 Chai" loading="lazy" src="https://via.placeholder.com/300x200?text=Dầu+Hít+Combo+5"/>
+<p><strong>Giá:</strong> 600.000đ <span class="old-price">650.000đ</span></p>
+<p><strong>Mô tả:</strong> Combo 5 chai Dầu Hít, tối ưu chi phí, giúp thông mũi và mang lại cảm giác dễ chịu trong thời gian dài.</p>
+<p><strong>Công dụng:</strong></p>
+<ul>
+<li>Thông mũi, giảm nghẹt mũi hiệu quả.</li>
+<li>Giảm đau đầu, mệt mỏi do cảm cúm.</li>
+<li>Mang lại cảm giác sảng khoái.</li>
+</ul>
+<button class="btn btn-main btn-pulse" onclick="addToCart('Dầu Hít Combo 5 Chai', 600000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Dầu Hít Combo 5 Chai')">Mua ngay</button>
+<button class="btn btn-close mt-2" onclick="closeProductPopup('dau-hit-5')">Đóng</button>
+</div>
+</div>
+<div class="popup" id="product-popup-vien-uong-1">
+<div class="popup-content">
+<h3>1 hộp Viên Uống Xương Khớp Thảo Dược 8S</h3>
+<img alt="1 hộp Viên Uống Xương Khớp Thảo Dược 8S" loading="lazy" src="https://via.placeholder.com/300x200?text=Viên+Uống+1+Hộp"/>
+<p><strong>Giá:</strong> 399.000đ</p>
+<p><strong>Mô tả:</strong> Viên Uống Xương Khớp Thảo Dược 8S hỗ trợ tăng cường sức khỏe xương khớp, giảm đau nhức và cải thiện vận động.</p>
+<p><strong>Công dụng:</strong></p>
+<ul>
+<li>Hỗ trợ giảm đau nhức xương khớp.</li>
+<li>Tăng cường độ linh hoạt cho khớp.</li>
+<li>Cải thiện sức khỏe xương khớp lâu dài.</li>
+</ul>
+<button class="btn btn-main btn-pulse" onclick="addToCart('Viên Uống Xương Khớp Thảo Dược 8S (1 hộp)', 399000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Viên Uống Xương Khớp Thảo Dược 8S (1 hộp)')">Mua ngay</button>
+<button class="btn btn-close mt-2" onclick="closeProductPopup('vien-uong-1')">Đóng</button>
+</div>
+</div>
+<!-- Order Popup -->
+<div class="popup" id="order-popup">
+<div class="popup-content">
+<h3>Đặt hàng ngay</h3>
+<div class="mb-4">
+<input class="w-full px-4 py-2 rounded-lg bg-[var(--accent-color)] border border-[#333] text-[var(--text-color)]" id="productInput" placeholder="Sản phẩm" readonly="" type="text"/>
+</div>
+<div class="mb-4 relative">
+<i class="fas fa-user absolute left-3 top-1/2 transform -translate-y-1/2 text-[var(--gray-color)]"></i>
+<input class="w-full pl-10 pr-4 py-2 rounded-lg bg-[var(--accent-color)] border border-[#333] text-[var(--text-color)] focus:border-[var(--primary-color)] focus:outline-none transition-all duration-300" placeholder="Họ và tên" required="" type="text"/>
+</div>
+<div class="mb-4 relative">
+<i class="fas fa-phone absolute left-3 top-1/2 transform -translate-y-1/2 text-[var(--gray-color)]"></i>
+<input class="w-full pl-10 pr-4 py-2 rounded-lg bg-[var(--accent-color)] border border-[#333] text-[var(--text-color)] focus:border-[var(--primary-color)] focus:outline-none transition-all duration-300" placeholder="Số điện thoại" required="" type="tel"/>
+</div>
+<div class="mb-4">
+<input class="w-full px-4 py-2 rounded-lg bg-[var(--accent-color)] border border-[#333] text-[var(--text-color)] focus:border-[var(--primary-color)] focus:outline-none transition-all duration-300" placeholder="Địa chỉ nhận hàng" required="" type="text"/>
+</div>
+<button class="btn btn-main btn-pulse w-full" onclick="submitOrder()">Xác nhận đặt hàng</button>
+<button class="btn btn-close mt-2 w-full" onclick="closeOrderPopup()">Hủy</button>
+</div>
+</div>
+<!-- Policy Modal -->
+<div class="policy-modal" id="policy-modal">
+<div class="policy-content">
+<h3>Chính sách</h3>
+<div class="policy-grid">
+<div>
+<h4>Giới thiệu</h4>
+<p>CÔNG TY TNHH 8 SANG BDS cung cấp các sản phẩm thảo dược thiên nhiên chất lượng cao, an toàn và hiệu quả.</p>
+<h4>Chính sách bảo mật</h4>
+<p>Thông tin khách hàng được bảo vệ nghiêm ngặt, chỉ sử dụng cho mục đích giao hàng và hỗ trợ.</p>
+<h4>Phương thức thanh toán</h4>
+<p>Hỗ trợ thanh toán COD, chuyển khoản ngân hàng, và ví điện tử.</p>
+<h4>Chính sách đổi trả</h4>
+<p>Đổi trả trong 7 ngày nếu sản phẩm lỗi hoặc không đúng mô tả, miễn phí vận chuyển.</p>
+</div>
+<div class="policy-sidebar">
+<h4>Theo dõi chúng tôi</h4>
+<a href="https://www.facebook.com/8sangbds" target="_blank">
+<i class="fab fa-facebook-f"></i> 8 Sang BDS
+          </a>
+</div>
+</div>
+<button class="btn btn-close mt-2 w-full" onclick="closePolicyModal()">Đóng</button>
+</div>
+</div>
+<!-- Scripts -->
+<script defer="" src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    // Initialize AOS
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof AOS !== 'undefined') {
+        AOS.init({
+          duration: 800,
+          once: true,
+          easing: 'ease-in-out',
+          offset: 100
+        });
+      } else {
+        console.error('AOS library failed to load');
+      }
 
-  <!-- Back to Top -->
-  <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><i class="fas fa-arrow-up"></i></div>
+      // Initialize Swiper
+      if (typeof Swiper !== 'undefined') {
+        new Swiper('.swiper-container', {
+          slidesPerView: 1,
+          spaceBetween: 20,
+          loop: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+          breakpoints: {
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 30,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+          },
+        });
+      } else {
+        console.error('Swiper library failed to load');
+      }
 
-  <!-- Cart -->
-  <div class="cart" onclick="toggleCart()"><i class="fas fa-shopping-cart"></i> Giỏ hàng (<span id="cart-count">0</span>)</div>
-  <div class="cart-panel" id="cart-panel">
-    <h4 class="font-semibold mb-4">Giỏ hàng của bạn</h4>
-    <div id="cart-items"></div>
-    <p class="mt-4 font-semibold">Tổng tiền: <span id="cart-total">0</span>đ</p>
-  </div>
-
-  <!-- Popup -->
-  <div class="popup" id="order-popup">
-    <div class="popup-content">
-      <h3 class="font-bold mb-4 text-[var(--primary-color)]">Đặt hàng ngay</h3>
-      <form onsubmit="submitForm(event)">
-        <input type="text" id="productInput" placeholder="Sản phẩm" readonly>
-        <input type="text" placeholder="Họ và tên" required>
-        <input type="tel" placeholder="Số điện thoại" required>
-        <input type="text" placeholder="Địa chỉ nhận hàng" required>
-        <button type="submit" class="btn-main mt-4">Xác nhận đặt hàng</button>
-        <button type="button" onclick="closePopup()" class="btn-buy-now mt-2">Hủy</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Scripts -->
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
-  <script>
-    AOS.init({ duration: 1000, once: true });
-
-    const swiper = new Swiper('.swiper', {
-      slidesPerView: 1.2,
-      spaceBetween: 24,
-      pagination: { el: '.swiper-pagination', clickable: true },
-      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-      breakpoints: { 768: { slidesPerView: 2.5 }, 1024: { slidesPerView: 3.5 } }
+      // Ensure default tab is active
+      showTab('cao-xoa-bop', document.querySelector('.tab.active'));
     });
 
-    async function loadRSS() {
-      try {
-        const res = await axios.get('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent('https://caoxoabopthaoduoc8s.vn/tin-tuc?format=feed&type=rss'));
-        const items = res.data.items.slice(0, 6);
-        const wrapper = document.getElementById('rss-news');
-        items.forEach((item, index) => {
-          const isFeatured = index < 2;
-          const image = item.thumbnail || 'https://via.placeholder.com/300x150?text=Tin+Tức';
-          wrapper.innerHTML += `
-            <div class='swiper-slide'>
-              <div class='news-card ${isFeatured ? 'featured' : ''}'>
-                <img src='${image}' alt='${item.title}'>
-                <h4>${item.title}</h4>
-                <p>${item.description.slice(0, 100)}...</p>
-                <a href='${item.link}' target='_blank'>Xem chi tiết</a>
-              </div>
-            </div>`;
-        });
-        swiper.update();
-      } catch (error) {
-        console.error('Lỗi khi tải RSS:', error);
-        document.getElementById('rss-news').innerHTML = '<p>Không thể tải tin tức. Vui lòng thử lại sau.</p>';
+    // Tab Functionality
+    function showTab(tabId, element) {
+      console.log('Switching to tab:', tabId);
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+        content.style.display = 'none';
+      });
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      const tabContent = document.getElementById(tabId);
+      if (tabContent) {
+        tabContent.classList.add('active');
+        tabContent.style.display = 'block';
+        element.classList.add('active');
+      } else {
+        console.error('Tab content not found:', tabId);
       }
     }
-    loadRSS();
 
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-    function saveCart() {
-      localStorage.setItem('cart', JSON.stringify(cart));
-      updateCart();
+    // Popup Functionality
+    function openProductPopup(id) {
+      console.log('Opening product popup:', id);
+      const popup = document.getElementById(`product-popup-${id}`);
+      if (popup) {
+        popup.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      } else {
+        console.error('Popup not found:', id);
+      }
     }
 
+    function closeProductPopup(id) {
+      const popup = document.getElementById(`product-popup-${id}`);
+      if (popup) {
+        popup.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    function openOrderPopup(product) {
+      console.log('Opening order popup for:', product);
+      const popup = document.getElementById('order-popup');
+      const productInput = document.getElementById('productInput');
+      productInput.value = product;
+      popup.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeOrderPopup() {
+      const popup = document.getElementById('order-popup');
+      popup.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    function submitOrder() {
+      console.log('Order submitted');
+      closeOrderPopup();
+    }
+
+    // Policy Modal
+    function openPolicyModal() {
+      console.log('Opening policy modal');
+      const modal = document.getElementById('policy-modal');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePolicyModal() {
+      const modal = document.getElementById('policy-modal');
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Social Chat
+    function openFacebookChat() {
+      console.log('Opening Facebook chat');
+      window.open('https://m.me/your_facebook_page_id', '_blank');
+    }
+
+    function openZaloChat() {
+      console.log('Opening Zalo chat');
+      window.open('https://zalo.me/your_zalo_phone_number', '_blank');
+    }
+
+    // Cart Functionality
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
     function addToCart(name, price) {
+      console.log('Added to cart:', name, price);
       const existingItem = cart.find(item => item.name === name);
       if (existingItem) {
         existingItem.quantity += 1;
       } else {
         cart.push({ name, price, quantity: 1 });
       }
-      saveCart();
+      localStorage.setItem('cart', JSON.stringify(cart));
     }
 
-    function removeFromCart(name) {
-      cart = cart.filter(item => item.name !== name);
-      saveCart();
-    }
-
-    function updateCart() {
-      const cartItems = document.getElementById('cart-items');
-      const cartCount = document.getElementById('cart-count');
-      const cartTotal = document.getElementById('cart-total');
-      cartItems.innerHTML = '';
-      let total = 0;
-      let count = 0;
-
-      cart.forEach(item => {
-        total += item.price * item.quantity;
-        count += item.quantity;
-        cartItems.innerHTML += `
-          <div class="cart-item">
-            <span>${item.name} x${item.quantity}</span>
-            <span>${(item.price * item.quantity).toLocaleString()}đ</span>
-            <button onclick="removeFromCart('${item.name}')">Xóa</button>
-          </div>`;
+    // Close popup when clicking outside
+    document.querySelectorAll('.popup, .policy-modal').forEach(el => {
+      el.addEventListener('click', (e) => {
+        if (e.target === el) {
+          el.classList.remove('active');
+          document.body.style.overflow = 'auto';
+        }
       });
+    });
+  </script>
+<!-- Facebook SDK -->
+<script async="" crossorigin="anonymous" defer="" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&amp;version=v20.0&amp;appId=your_facebook_app_id"></script>
+<!-- Cart Popup -->
+<div class="popup" id="cart-popup">
+<div class="popup-content max-w-xl">
+<h3>Giỏ hàng</h3>
+<div class="space-y-4 text-left text-sm text-[var(--text-color)] max-h-80 overflow-y-auto" id="cart-items"></div>
+<div class="mt-4 font-bold text-lg text-[var(--primary-color)] text-right">
+      Tổng tiền: <span id="cart-total">0đ</span>
+</div>
+<div class="mt-4 flex justify-between">
+<button class="btn btn-close" onclick="closeCart()">Đóng</button>
+<button class="btn btn-main" onclick="checkout()">Thanh toán</button>
+</div>
+</div>
+</div>
+<!-- Nút mở giỏ hàng -->
+<button class="btn btn-main fixed top-5 right-5 z-[999]" onclick="openCart()">🛒 Giỏ hàng</button>
+<script>
+  let cart = [];
 
-      cartCount.textContent = count;
-      cartTotal.textContent = total.toLocaleString();
+  function addToCart(name, price) {
+    const existing = cart.find(item => item.name === name);
+    if (existing) {
+      existing.quantity++;
+    } else {
+      cart.push({ name, price, quantity: 1, image: getImageByName(name) });
     }
+    updateCartDisplay();
+  }
 
-    function toggleCart() {
-      const cartPanel = document.getElementById('cart-panel');
-      cartPanel.classList.toggle('active');
-    }
+  function getImageByName(name) {
+    const product = document.querySelector(`img[alt*="${name}"]`);
+    return product ? product.src : 'https://via.placeholder.com/60';
+  }
 
-    function showTab(tabId, element) {
-      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-      element.classList.add('active');
-      document.getElementById(tabId).classList.add('active');
-    }
+  function updateCartDisplay() {
+    const cartItems = document.getElementById('cart-items');
+    const cartTotal = document.getElementById('cart-total');
+    cartItems.innerHTML = '';
+    let total = 0;
 
-    function openPopup(productName) {
-      document.getElementById('order-popup').classList.add('active');
-      document.getElementById('productInput').value = productName;
-    }
-
-    function closePopup() {
-      document.getElementById('order-popup').classList.remove('active');
-    }
-
-    function submitForm(e) {
-      e.preventDefault();
-      alert("Đơn hàng đã được gửi!");
-      e.target.reset();
-      closePopup();
-    }
-
-    window.addEventListener('scroll', () => {
-      const backToTop = document.querySelector('.back-to-top');
-      backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+    cart.forEach((item, index) => {
+      total += item.price * item.quantity;
+      cartItems.innerHTML += `
+        <div class="cart-item">
+          <img src="${item.image}" alt="${item.name}">
+          <div class="cart-item-info">
+            <p class="font-bold">${item.name}</p>
+            <p>${item.quantity} x ${item.price.toLocaleString()}đ</p>
+          </div>
+          <div class="cart-item-actions">
+            <button onclick="changeQuantity(${index}, 1)">+</button>
+            <button onclick="changeQuantity(${index}, -1)">−</button>
+            <button onclick="removeItem(${index})">Xóa</button>
+          </div>
+        </div>`;
     });
 
-    updateCart();
-  </script>
+    cartTotal.textContent = total.toLocaleString() + 'đ';
+  }
+
+  function changeQuantity(index, delta) {
+    cart[index].quantity += delta;
+    if (cart[index].quantity <= 0) cart.splice(index, 1);
+    updateCartDisplay();
+  }
+
+  function removeItem(index) {
+    cart.splice(index, 1);
+    updateCartDisplay();
+  }
+
+  function openCart() {
+    document.getElementById('cart-popup').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCart() {
+    document.getElementById('cart-popup').classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+
+  function checkout() {
+    alert("Tính năng thanh toán đang được phát triển!");
+  }
+</script>
 </body>
-</html>
+</html> 
