@@ -14,6 +14,7 @@
 <link async="" href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
 <link async="" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/>
 <script crossorigin="anonymous" defer="" src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
 <style>
     :root {
       --primary-color: #ffd700; /* Vàng */
@@ -202,15 +203,39 @@
 
     /* Hero Section */
     .hero {
-      min-height: 100vh;
+      min-height: 80vh; /* Giảm chiều cao để tránh container quá lớn */
       display: flex;
       align-items: center;
       justify-content: center;
-      background-size: cover;
+      background-size: cover; /* Lấp đầy container, không để trống */
       background-position: center;
+      background-repeat: no-repeat;
       position: relative;
       text-align: center;
       padding-top: 64px;
+    }
+
+    /* Responsive cho các màn hình */
+    @media (max-width: 1024px) {
+      .hero {
+        min-height: 70vh;
+        background-size: cover;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        min-height: 60vh;
+        background-size: cover;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        min-height: 50vh;
+        background-size: cover;
+        background-position: center top; /* Đẩy ảnh lên trên để tránh cắt nội dung */
+      }
     }
 
     .hero::before {
@@ -220,7 +245,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8));
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)); /* Giảm opacity */
       z-index: 0;
     }
 
@@ -433,7 +458,7 @@
       opacity: 1;
     }
 
-    .swiper-button/next, .swiper-button-prev {
+    .swiper-button-next, .swiper-button-prev {
       color: var(--primary-color);
       background: rgba(0, 0, 0, 0.5);
       border-radius: 50%;
@@ -690,7 +715,7 @@
       border-radius: 8px;
       background: var(--accent-color);
       border: 1px solid #333;
-      color: #000000; /* Chữ đen khi gõ */
+      color: #ffffff;
       font-size: 0.875rem;
       transition: border-color 0.3s ease-in-out;
     }
@@ -703,7 +728,7 @@
     .contact-form input::placeholder,
     .contact-form textarea::placeholder,
     .popup-content input::placeholder {
-      color: var(--gray-color); /* Placeholder xám */
+      color: var(--gray-color);
     }
 
     .contact-form input:focus,
@@ -853,6 +878,85 @@
       border-top: 1px solid #333;
     }
 
+    /* Cart */
+    .cart {
+      position: fixed;
+      top: 70px;
+      right: 1.5rem;
+      background: var(--primary-color);
+      color: #000000;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      cursor: pointer;
+      z-index: 999;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .cart:hover {
+      background: #e6c200;
+    }
+
+    .cart-panel {
+      display: none;
+      position: fixed;
+      top: 120px;
+      right: 1.5rem;
+      background: var(--accent-color);
+      border-radius: 12px;
+      border: 1px solid var(--primary-color);
+      padding: 1.5rem;
+      width: 320px;
+      z-index: 998;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .cart-panel.active {
+      display: block;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .cart-item button {
+      background: var(--primary-color);
+      color: #000000;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .cart-item button:hover {
+      background: #e6c200;
+    }
+
+    /* Back to Top */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--primary-color);
+      color: #000000;
+      padding: 1rem;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      z-index: 999;
+      transition: all 0.3s ease;
+    }
+
+    .back-to-top:hover {
+      background: #e6c200;
+      transform: translateY(-3px);
+    }
+
     /* Responsive */
     @media (max-width: 1024px) {
       .products {
@@ -898,7 +1002,6 @@
       }
 
       .hero {
-        min-height: 80vh;
         padding-top: 56px;
       }
 
@@ -950,6 +1053,11 @@
         right: 1rem;
         bottom: 1rem;
         gap: 0.75rem;
+      }
+
+      .cart-panel {
+        width: 90%;
+        right: 5%;
       }
     }
 
@@ -1015,114 +1123,14 @@
         max-width: 250px;
       }
     }
-  
-.cart-item {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  border-bottom: 1px solid #333;
-  padding-bottom: 1rem;
-}
-.cart-item img {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-.cart-item-info {
-  flex-grow: 1;
-}
-.cart-item-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: none;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 9999;
-  align-items: center;
-  justify-content: center;
-}
-
-.popup.active {
-  display: flex;
-}
-
-.popup-content {
-  background: #fff;
-  padding: 1rem;
-  border-radius: 10px;
-  max-height: 90vh;
-  overflow-y: auto;
-  width: 90%;
-  max-width: 600px;
-  z-index: 10000;
-}
-
-.btn-main {
-  background-color: #facc15;
-  color: #000;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-}
-
-.fixed {
-  position: fixed;
-}
-
-.z-\[999\] {
-  z-index: 999 !important;
-}
-
-/* Đảm bảo header không che popup */
-header, .header, .site-header {
-    z-index: 1000 !important;
-    position: relative;
-}
-
-/* Đảm bảo popup luôn trên top */
-.popup {
-    position: fixed !important;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0,0,0,0.7);
-    z-index: 9999 !important;
-    display: none;
-    align-items: center;
-    justify-content: center;
-}
-
-.popup.active {
-    display: flex !important;
-}
-
-.popup-content {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 600px;
-    max-height: 90vh;
-    overflow-y: auto;
-    z-index: 10000 !important;
-}
-</style>
+  </style>
 </head>
 <body>
 <!-- Header -->
 <header>
 <div class="header-content">
 <div class="logo">
-<img alt="8 Sang BDS Logo" loading="lazy" src="https://via.placeholder.com/120x40?text=8+Sang+BDS+Logo"/>
+<img alt="8 Sang BDS Logo" loading="lazy" src="https://8sangbds.com/logo.png"/>
 </div>
 <nav class="nav-menu">
 <a class="nav-link" href="#products">Sản phẩm</a>
@@ -1133,12 +1141,12 @@ header, .header, .site-header {
 </div>
 </header>
 <!-- Hero Section -->
-<section class="hero" style="background-image: url('https://via.placeholder.com/1920x1080?text=Hero+Image');">
+<section class="hero" style="background-image: url('images/1466x460.jpg');">
 <div class="container">
-<div class="hero-content" data-aos="fade-up" data-aos-duration="800">
-<h1 data-aos="zoom-in" data-aos-delay="100">Thảo Dược 8 Sang BDS</h1>
-<p data-aos="fade-up" data-aos-delay="200">Sức khỏe từ thiên nhiên – Sang trọng như phong cách sống</p>
-<p class="price-highlight" data-aos="fade-up" data-aos-delay="300">Cao Xoa Bóp: 169.000đ – Mua 5 tặng 1</p>
+<div class="hero-content" data-aos="fade-up" data-aos-duration="600">
+<h1 data-aos="zoom-in" data-aos-delay="100">Dầu Hít Thảo Dược 8 Sang BDS</h1>
+<p data-aos="fade-up" data-aos-delay="200">Mừng ra mắt – Sảng khoái từ thiên nhiên</p>
+<p class="price-highlight" data-aos="fade-up" data-aos-delay="300">Chỉ 139.000đ – Mua 5 tặng 1, Mua 10 tặng 3</p>
 <a class="btn btn-main btn-pulse nav-link" data-aos="fade-up" data-aos-delay="400" href="#products">Khám phá ngay</a>
 </div>
 </div>
@@ -1158,67 +1166,66 @@ header, .header, .site-header {
 <div class="tab-content active" id="cao-xoa-bop">
 <div class="products">
 <div class="product-card" data-aos="fade-up" data-aos-delay="100">
-<div class="badge">Mới</div>
-<img alt="1 chai Cao Xoa Bóp Thảo Dược 8S (50ml)" loading="lazy" onclick="openProductPopup('cao-xoa-bop-1')" src="https://via.placeholder.com/300x160?text=Cao+Xoa+Bóp+1+Chai"/>
-<p><strong onclick="openProductPopup('cao-xoa-bop-1')">1 chai Cao Xoa Bóp Thảo Dược 8S (50ml)</strong></p>
-<p class="price">169.000đ</p>
+<img alt="Cao Xoa Bóp Chai Nhôm" loading="lazy" onclick="openProductPopup('cao-xoa-bop-1')" src="https://8sangbds.com/img/cao1.png"/>
+<p><strong onclick="openProductPopup('cao-xoa-bop-1')">Cao Xoa Bóp Chai Nhôm (50ml)</strong></p>
+<p class="price">239.000đ</p>
 <div class="btns">
-<button class="btn btn-main btn-pulse" onclick="addToCart('Cao Xoa Bóp 1 chai', 169000)">Thêm vào giỏ</button>
-<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Cao Xoa Bóp 1 chai')">Mua ngay</button>
+<button class="btn btn-main btn-pulse" onclick="addToCart('Cao Xoa Bóp Chai Nhôm', 239000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openProductPopup('cao-xoa-bop-1')">Mua ngay</button>
 </div>
 </div>
 <div class="product-card" data-aos="fade-up" data-aos-delay="200">
 <div class="badge">Giảm giá</div>
+<img alt="Combo 3 Tặng 1 Cao" loading="lazy" onclick="openProductPopup('cao-xoa-bop-3')" src="https://8sangbds.com/img/cao2.png"/>
+<p><strong onclick="openProductPopup('cao-xoa-bop-3')">Combo 3 Tặng 1 Cao</strong></p>
+<p class="price">717.000đ <span class="old-price">956.000đ</span></p>
+<div class="btns">
+<button class="btn btn-main btn-pulse" onclick="addToCart('Combo Cao Xoa Bóp 3+1', 717000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openProductPopup('cao-xoa-bop-3')">Mua ngay</button>
+</div>
+</div>
+<div class="product-card" data-aos="fade-up" data-aos-delay="300">
+<div class="badge">Ưu đãi</div>
 <img alt="Mua 5 Chai Tặng 1 Cao" loading="lazy" onclick="openProductPopup('cao-xoa-bop-5')" src="https://via.placeholder.com/300x160?text=Cao+Xoa+Bóp+Combo+5+1"/>
 <p><strong onclick="openProductPopup('cao-xoa-bop-5')">Mua 5 Chai Tặng 1 Cao</strong></p>
 <p class="price">845.000đ <span class="old-price">1.014.000đ</span></p>
 <div class="btns">
 <button class="btn btn-main btn-pulse" onclick="addToCart('Mua 5 Chai Tặng 1 Cao', 845000)">Thêm vào giỏ</button>
-<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Mua 5 Chai Tặng 1 Cao')">Mua ngay</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openProductPopup('cao-xoa-bop-5')">Mua ngay</button>
 </div>
 </div>
-<div class="product-card" data-aos="fade-up" data-aos-delay="300">
-<div class="badge">Ưu đãi</div>
-<img alt="Combo 3 Chai Cao Xoa Bóp" loading="lazy" onclick="openProductPopup('cao-xoa-bop-3')" src="https://via.placeholder.com/300x160?text=Cao+Xoa+Bóp+Combo+3"/>
-<p><strong onclick="openProductPopup('cao-xoa-bop-3')">Combo 3 Chai Cao Xoa Bóp</strong></p>
-<p class="price">499.000đ <span class="old-price">507.000đ</span></p>
-<div class="btns">
-<button class="btn btn-main btn-pulse" onclick="addToCart('Combo 3 Chai Cao Xoa Bóp', 499000)">Thêm vào giỏ</button>
-<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Combo 3 Chai Cao Xoa Bóp')">Mua ngay</button>
-</div>
-</div>
-</div>
+<div class="product-card" data-aos="fade-up"><img alt="Cao Xoa Bóp Phiên Bản Đỏ (50ml)" loading="lazy" onclick="openProductPopup('cao-xoa-bop-6')" src="https://8sangbds.com/img/cao1.png"/><p><strong onclick="openProductPopup('cao-xoa-bop-6')">Cao Xoa Bóp Phiên Bản Đỏ (50ml)</strong></p><p class="price">199.000đ</p><div class="btns"><button class="btn btn-main btn-pulse" onclick="addToCart('Cao Xoa Bóp Phiên Bản Đỏ (50ml)', 199000)">Thêm vào giỏ</button><button class="btn btn-buy-now btn-pulse" onclick="openProductPopup('cao-xoa-bop-6')">Mua ngay</button></div></div><div class="product-card" data-aos="fade-up"><img alt="Cao Xoa Bóp Phiên Bản Vàng (50ml)" loading="lazy" onclick="openProductPopup('cao-xoa-bop-7')" src="https://8sangbds.com/img/cao1.png"/><p><strong onclick="openProductPopup('cao-xoa-bop-7')">Cao Xoa Bóp Phiên Bản Vàng (50ml)</strong></p><p class="price">179.000đ</p><div class="btns"><button class="btn btn-main btn-pulse" onclick="addToCart('Cao Xoa Bóp Phiên Bản Vàng (50ml)', 179000)">Thêm vào giỏ</button><button class="btn btn-buy-now btn-pulse" onclick="openProductPopup('cao-xoa-bop-7')">Mua ngay</button></div></div><div class="product-card" data-aos="fade-up"><img alt="Combo 3 Loại Nâu, Đen, Xanh" loading="lazy" onclick="openProductPopup('cao-xoa-bop-8')" src="https://8sangbds.com/img/cao2.png"/><p><strong onclick="openProductPopup('cao-xoa-bop-8')">Combo 3 Loại Nâu, Đen, Xanh</strong></p><p class="price">579.000đ</p><div class="btns"><button class="btn btn-main btn-pulse" onclick="addToCart('Combo 3 Loại Nâu, Đen, Xanh', 579000)">Thêm vào giỏ</button><button class="btn btn-buy-now btn-pulse" onclick="openProductPopup('cao-xoa-bop-8')">Mua ngay</button></div></div></div>
 </div>
 <div class="tab-content" id="dau-hit">
 <div class="products">
 <div class="product-card" data-aos="fade-up" data-aos-delay="100">
 <div class="badge">Giảm giá</div>
-<img alt="Dầu Hít Thảo Dược 8S (1 chai)" loading="lazy" onclick="openProductPopup('dau-hit-1')" src="https://via.placeholder.com/300x160?text=Dầu+Hít+1+Chai"/>
+<img alt="Dầu Hít Thảo Dược 8S (1 chai)" loading="lazy" onclick="openProductPopup('dau-hit-1')" src="https://8sangbds.com/images/dauhit011.jpg"/>
 <p><strong onclick="openProductPopup('dau-hit-1')">Dầu Hít Thảo Dược 8S (1 chai)</strong></p>
-<p class="price">130.000đ <span class="old-price">199.000đ</span></p>
+<p class="price">139.000đ <span class="old-price">199.000đ</span></p>
 <div class="btns">
-<button class="btn btn-main btn-pulse" onclick="addToCart('Dầu Hít Thảo Dược 8S (1 chai)', 130000)">Thêm vào giỏ</button>
+<button class="btn btn-main btn-pulse" onclick="addToCart('Dầu Hít Thảo Dược 8S (1 chai)', 139000)">Thêm vào giỏ</button>
 <button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Dầu Hít Thảo Dược 8S (1 chai)')">Mua ngay</button>
 </div>
 </div>
 <div class="product-card" data-aos="fade-up" data-aos-delay="200">
 <div class="badge">Mới</div>
-<img alt="Dầu Hít Combo 3 Chai" loading="lazy" onclick="openProductPopup('dau-hit-3')" src="https://via.placeholder.com/300x160?text=Dầu+Hít+Combo+3"/>
-<p><strong onclick="openProductPopup('dau-hit-3')">Dầu Hít Thảo Dược 8S (Combo 3 Chai)</strong></p>
-<p class="price">360.000đ <span class="old-price">390.000đ</span></p>
+<img alt="Dầu Hít Combo 5 Tặng 1" loading="lazy" onclick="openProductPopup('dau-hit-5')" src="https://8sangbds.com/images/5tang1dauhit.jpg"/>
+<p><strong onclick="openProductPopup('dau-hit-5')">Dầu Hít Combo 5 Tặng 1</strong></p>
+<p class="price">695.000đ</p>
 <div class="btns">
-<button class="btn btn-main btn-pulse" onclick="addToCart('Dầu Hít Combo 3 Chai', 360000)">Thêm vào giỏ</button>
-<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Dầu Hít Combo 3 Chai')">Mua ngay</button>
+<button class="btn btn-main btn-pulse" onclick="addToCart('Combo Dầu Hít 5+1', 695000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Combo Dầu Hít 5+1')">Mua ngay</button>
 </div>
 </div>
 <div class="product-card" data-aos="fade-up" data-aos-delay="300">
 <div class="badge">Ưu đãi</div>
-<img alt="Dầu Hít Combo 5 Chai" loading="lazy" onclick="openProductPopup('dau-hit-5')" src="https://via.placeholder.com/300x160?text=Dầu+Hít+Combo+5"/>
-<p><strong onclick="openProductPopup('dau-hit-5')">Dầu Hít Thảo Dược 8S (Combo 5 Chai)</strong></p>
-<p class="price">600.000đ <span class="old-price">650.000đ</span></p>
+<img alt="Dầu Hít Combo 10 Tặng 3" loading="lazy" onclick="openProductPopup('dau-hit-10')" src="https://8sangbds.com/images/mua10tang3dauhit.jpg"/>
+<p><strong onclick="openProductPopup('dau-hit-10')">Dầu Hít Combo 10 Tặng 3</strong></p>
+<p class="price">1.390.000đ</p>
 <div class="btns">
-<button class="btn btn-main btn-pulse" onclick="addToCart('Dầu Hít Combo 5 Chai', 600000)">Thêm vào giỏ</button>
-<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Dầu Hít Combo 5 Chai')">Mua ngay</button>
+<button class="btn btn-main btn-pulse" onclick="addToCart('Combo Dầu Hít 10+3', 1390000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Combo Dầu Hít 10+3')">Mua ngay</button>
 </div>
 </div>
 </div>
@@ -1227,12 +1234,12 @@ header, .header, .site-header {
 <div class="products">
 <div class="product-card" data-aos="fade-up" data-aos-delay="100">
 <div class="badge">Mới</div>
-<img alt="1 hộp Viên Uống Xương Khớp Thảo Dược 8S" loading="lazy" onclick="openProductPopup('vien-uong-1')" src="https://via.placeholder.com/300x160?text=Viên+Uống+1+Hộp"/>
-<p><strong onclick="openProductPopup('vien-uong-1')">1 hộp Viên Uống Xương Khớp Thảo Dược 8S</strong></p>
-<p class="price">399.000đ</p>
+<img alt="Viên Uống Thảo Dược 8S" loading="lazy" onclick="openProductPopup('vien-uong-1')" src="https://8sangbds.com/img/vien1.png"/>
+<p><strong onclick="openProductPopup('vien-uong-1')">Viên Uống Thảo Dược 8S</strong></p>
+<p class="price">299.000đ</p>
 <div class="btns">
-<button class="btn btn-main btn-pulse" onclick="addToCart('Viên Uống Xương Khớp Thảo Dược 8S (1 hộp)', 399000)">Thêm vào giỏ</button>
-<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Viên Uống Xương Khớp Thảo Dược 8S (1 hộp)')">Mua ngay</button>
+<button class="btn btn-main btn-pulse" onclick="addToCart('Viên Uống Thảo Dược 8S', 299000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Viên Uống Thảo Dược 8S')">Mua ngay</button>
 </div>
 </div>
 </div>
@@ -1259,29 +1266,57 @@ header, .header, .site-header {
 <p class="text-[var(--gray-color)] mt-2 text-[1rem]">Cập nhật thông tin về sức khỏe và sản phẩm</p>
 </div>
 <div class="swiper-container" data-aos="fade-up" data-aos-delay="100">
-<div class="swiper-wrapper">
+<div class="swiper-wrapper" id="rss-news">
+<!-- Dưới đây là phần chèn sẵn nhiều bài viết hơn vào khu vực #rss-news -->
 <div class="swiper-slide">
-<img alt="Tin tức 1" loading="lazy" src="https://via.placeholder.com/400x200?text=Tin+tức+1"/>
-<h3>Lợi ích của thảo dược trong chăm sóc sức khỏe</h3>
-<p>Khám phá cách các loại thảo dược thiên nhiên hỗ trợ giảm đau nhức và cải thiện sức khỏe tổng thể.</p>
-<a class="btn btn-buy-now" href="#">Đọc thêm</a>
+<img alt="8S đồng hành chăm sóc sức khỏe" src="https://8sangbds.com/uploads/tin1.jpg"/>
+<h3>8S đồng hành chăm sóc sức khỏe cộng đồng</h3>
+<p>Hành trình khám chữa bệnh miễn phí tại các vùng khó khăn, lan tỏa yêu thương cùng 8S...</p>
+<a class="btn btn-main" href="https://8sangbds.com/tin-tuc/suc-khoe-cong-dong" target="_blank">Xem chi tiết</a>
 </div>
 <div class="swiper-slide">
-<img alt="Tin tức 2" loading="lazy" src="https://via.placeholder.com/400x200?text=Tin+tức+2"/>
-<h3>Cao Xoa Bóp 8S – Bí quyết giảm đau hiệu quả</h3>
-<p>Tìm hiểu cách Cao Xoa Bóp Thảo Dược 8S giúp giảm đau nhức cơ khớp chỉ sau vài lần sử dụng.</p>
-<a class="btn btn-buy-now" href="#">Đọc thêm</a>
+<img alt="Cảnh báo hàng giả 8S" src="https://8sangbds.com/uploads/tin2.jpg"/>
+<h3>Cảnh báo hàng giả Xương Khớp Thảo Mộc 8S</h3>
+<p>Phân biệt thật giả qua Facebook, bao bì và cách chốt đơn. Bảo vệ quyền lợi khách hàng...</p>
+<a class="btn btn-main" href="https://8sangbds.com/tin-tuc/canh-bao-hang-gia" target="_blank">Xem chi tiết</a>
 </div>
 <div class="swiper-slide">
-<img alt="Tin tức 3" loading="lazy" src="https://via.placeholder.com/400x200?text=Tin+tức+3"/>
-<h3>Dầu Hít 8S – Đồng hành cùng hơi thở</h3>
-<p>Hỗ trợ thông mũi, giảm nghẹt với tinh dầu tự nhiên từ Dầu Hít Thảo Dược 8S.</p>
-<a class="btn btn-buy-now" href="#">Đọc thêm</a>
+<img alt="8S ra mắt dầu hít mới" src="https://8sangbds.com/uploads/tin3.jpg"/>
+<h3>Ra mắt Dầu Hít Thảo Dược 8S</h3>
+<p>Sản phẩm mới với công dụng thông mũi, giảm đau đầu, chống say xe, chiết xuất thảo dược 100%...</p>
+<a class="btn btn-main" href="https://8sangbds.com/tin-tuc/ra-mat-dau-hit" target="_blank">Xem chi tiết</a>
+</div>
+<div class="swiper-slide">
+<img alt="Chương trình khuyến mãi 8S" src="https://8sangbds.com/uploads/tin4.jpg"/>
+<h3>Chương trình khuyến mãi lớn tháng 4</h3>
+<p>Đừng bỏ lỡ ưu đãi mua 5 tặng 1 và nhiều phần quà hấp dẫn khi mua hàng online tại 8S...</p>
+<a class="btn btn-main" href="https://8sangbds.com/tin-tuc/khuyen-mai-thang-4" target="_blank">Xem chi tiết</a>
+</div>
+<div class="swiper-slide">
+<img alt="Thăm nhà máy sản xuất 8S" src="https://8sangbds.com/uploads/tin5.jpg"/>
+<h3>Thăm quan nhà máy sản xuất chuẩn GMP</h3>
+<p>8 Sang BDS cam kết chất lượng sản phẩm thông qua quy trình sản xuất đạt chuẩn quốc tế GMP...</p>
+<a class="btn btn-main" href="https://8sangbds.com/tin-tuc/nha-may-gmp" target="_blank">Xem chi tiết</a>
+</div>
+<div class="swiper-slide">
+<img alt="Đồng hành cùng y bác sĩ vùng cao" src="https://8sangbds.com/uploads/tin6.jpg"/>
+<h3>Đồng hành cùng y bác sĩ vùng cao</h3>
+<p>8S cùng đội ngũ bác sĩ tình nguyện đến các bản làng vùng sâu để hỗ trợ sức khỏe cho người dân...</p>
+<a class="btn btn-main" href="https://8sangbds.com/tin-tuc/tu-thien-vung-cao" target="_blank">Xem chi tiết</a>
+</div>
+<div class="swiper-slide">
+<img alt="Cách sử dụng sản phẩm 8S đúng cách" src="https://8sangbds.com/uploads/tin7.jpg"/>
+<h3>Hướng dẫn sử dụng sản phẩm 8S hiệu quả</h3>
+<p>Chi tiết cách sử dụng cao xoa bóp, viên uống, dầu hít giúp phát huy tối đa hiệu quả điều trị...</p>
+<a class="btn btn-main" href="https://8sangbds.com/tin-tuc/huong-dan-su-dung" target="_blank">Xem chi tiết</a>
 </div>
 </div>
 <div class="swiper-pagination"></div>
 <div class="swiper-button-prev"></div>
 <div class="swiper-button-next"></div>
+</div>
+<div class="text-center mt-8">
+<a class="btn btn-main" href="https://caoxoabopthaoduoc8s.vn/tin-tuc" target="_blank">Xem thêm</a>
 </div>
 </div>
 </section>
@@ -1299,6 +1334,10 @@ header, .header, .site-header {
 <input placeholder="Họ và tên" required="" type="text"/>
 </div>
 <div class="input-group">
+<i class="fas fa-envelope"></i>
+<input placeholder="Email" required="" type="email"/>
+</div>
+<div class="input-group">
 <i class="fas fa-phone"></i>
 <input placeholder="Số điện thoại" required="" type="tel"/>
 </div>
@@ -1314,39 +1353,27 @@ header, .header, .site-header {
 </div>
 </section>
 <!-- Footer -->
-<!-- FOOTER GIỐNG 8SANGBDS.COM -->
-<!-- Footer -->
-&lt;<!-- Footer -->
 <footer class="footer">
 <div class="footer-grid">
-<!-- Cột 1: Logo + Giới thiệu -->
 <div data-aos="fade-up" data-aos-delay="100">
-<img alt="8 Sang BDS Logo" class="hover:scale-105" loading="lazy" src="https://via.placeholder.com/160x40?text=8+Sang+BDS+Logo" style="max-width: 160px; margin-bottom: 1rem; transition: transform 0.3s ease-in-out;"/>
+<img alt="8 Sang BDS Logo" class="hover:scale-105" loading="lazy" src="https://8sangbds.com/logo.png" style="max-width: 160px; margin-bottom: 1rem; transition: transform 0.3s ease-in-out;"/>
 <p class="font-bold text-[var(--primary-color)] mb-2">CÔNG TY TNHH 8 SANG BDS</p>
 <p class="text-[var(--gray-color)] text-sm">Giấy chứng nhận đăng ký doanh nghiệp số: 0316897403. Nơi cấp: Phòng Đăng ký kinh doanh – Sở Kế hoạch và Đầu tư TP. HCM, cấp lần đầu ngày 09/06/2021; cấp thay đổi lần thứ 1 ngày 01/12/2021.</p>
 <div class="mt-4 flex gap-3">
-<a class="text-[var(--primary-color)] transition-colors duration-300 hover:text-[#e6c200]" href="https://www.facebook.com/8sangbds" target="_blank">
-<i class="fab fa-facebook-f"></i>
-</a>
-<a class="text-[var(--primary-color)] transition-colors duration-300 hover:text-[#e6c200]" href="https://www.youtube.com/@8sangbds" target="_blank">
-<i class="fab fa-youtube"></i>
-</a>
-<a class="text-[var(--primary-color)] transition-colors duration-300 hover:text-[#e6c200]" href="https://www.tiktok.com/@8sangbds" target="_blank">
-<i class="fab fa-tiktok"></i>
-</a>
+<a class="text-[var(--primary-color)] transition-colors duration-300 hover:text-[#e6c200]" href="https://www.facebook.com/8sangbds" target="_blank"><i class="fab fa-facebook-f"></i></a>
+<a class="text-[var(--primary-color)] transition-colors duration-300 hover:text-[#e6c200]" href="https://www.youtube.com/@8sangbds" target="_blank"><i class="fab fa-youtube"></i></a>
+<a class="text-[var(--primary-color)] transition-colors duration-300 hover:text-[#e6c200]" href="https://www.tiktok.com/@8sangbds" target="_blank"><i class="fab fa-tiktok"></i></a>
 </div>
 </div>
-<!-- Cột 2: Thông tin công ty -->
 <div data-aos="fade-up" data-aos-delay="200">
 <h4 class="text-[var(--primary-color)] mb-3">Thông tin công ty</h4>
 <p class="text-[var(--gray-color)] text-sm mb-2">Trụ sở chính: 218 Tên Lửa, P. Bình Trị Đông B, Q. Bình Tân, TP. Hồ Chí Minh</p>
 <p class="text-[var(--gray-color)] text-sm mb-2">Địa chỉ liên hệ: 218 Tên Lửa, P. Bình Trị Đông B, Q. Bình Tân, TP. Hồ Chí Minh</p>
 <p class="text-sm mb-2">Hotline: <a class="text-[var(--primary-color)] font-bold hover:text-[#e6c200] transition-colors duration-300" href="tel:1900888663">1900888663</a></p>
 <p class="text-sm mb-2">Mua hàng: <a class="text-[var(--primary-color)] hover:text-[#e6c200] transition-colors duration-300" href="tel:0818299606">0818299606</a> - CSKH: <a class="text-[var(--primary-color)] hover:text-[#e6c200] transition-colors duration-300" href="tel:0938756005">0938.756.005</a></p>
-<p class="text-sm">Email: <a class="text-[var(--primary-color)] hover:text-[#e6c200] transition-colors duration-300" href="mailto:info@8sangbds.com">info@8sangbds.com</a></p>
+<p class="text-sm">Email: <a class="text-[var(--primary-color)] hover:text-[#e6c200] transition-colors duration-300" href="/cdn-cgi/l/email-protection#edd59e8c838a8f899ead8a808c8481c38e8280"><span class="__cf_email__" data-cfemail="09713a28272e2b2d3a092e24282025672a2624">[email protected]</span></a></p>
 <p class="text-[var(--gray-color)] text-sm">MST: 0316897403</p>
 </div>
-<!-- Cột 3: Quy định & Chính sách -->
 <div data-aos="fade-up" data-aos-delay="300">
 <h4 class="text-[var(--primary-color)] mb-3">Quy định &amp; chính sách</h4>
 <ul class="list-none p-0 m-0 text-sm">
@@ -1359,12 +1386,10 @@ header, .header, .site-header {
 <li><a class="text-[var(--gray-color)] hover:text-[var(--primary-color)] transition-colors duration-300" href="#">Chính sách bảo vệ người tiêu dùng</a></li>
 </ul>
 </div>
-<!-- Cột 4: Fanpage -->
 <div data-aos="fade-up" data-aos-delay="400">
 <h4 class="text-[var(--primary-color)] mb-3">Fanpage</h4>
 <div class="relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
-<iframe allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen="true" frameborder="0" height="214" loading="lazy" scrolling="no" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F8sangbds&amp;tabs&amp;width=300&amp;height=214&amp;small_header=false&amp;adapt_container_width=true&amp;hide_cover=false&amp;show_facepile=true" style="border:none;overflow:hidden" width="300">
-</iframe>
+<iframe allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen="true" frameborder="0" height="214" loading="lazy" scrolling="no" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F8sangbds&amp;tabs&amp;width=300&amp;height=214&amp;small_header=false&amp;adapt_container_width=true&amp;hide_cover=false&amp;show_facepile=true" style="border:none;overflow:hidden" width="300"></iframe>
 </div>
 <div class="mt-3 flex gap-2 justify-center">
 <img alt="Đã thông báo" loading="lazy" src="https://via.placeholder.com/70x35?text=Đã+thông+báo" style="height: 35px;"/>
@@ -1389,12 +1414,34 @@ header, .header, .site-header {
 <i class="fas fa-comment"></i>
 </div>
 </div>
+<!-- Back to Top -->
+<div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><i class="fas fa-arrow-up"></i></div>
+<!-- Cart -->
+<div class="cart" onclick="toggleCart()"><i class="fas fa-shopping-cart"></i> Giỏ hàng (<span id="cart-count">0</span>)</div>
+<div class="cart-panel" id="cart-panel">
+<h4 class="font-semibold mb-4">Giỏ hàng của bạn</h4>
+<div id="cart-items"></div>
+<p class="mt-4 font-semibold">Tổng tiền: <span id="cart-total">0</span>đ</p>
+<button class="btn btn-main mt-4 w-full" onclick="openCartPopup()">Xem giỏ hàng chi tiết</button>
+</div>
+<!-- Cart Popup -->
+<div class="popup" id="cart-popup">
+<div class="popup-content max-w-xl">
+<h3>Giỏ hàng</h3>
+<div class="space-y-4 text-left text-sm text-[var(--text-color)] max-h-80 overflow-y-auto" id="cart-items-popup"></div>
+<div class="mt-4 font-bold text-lg text-[var(--primary-color)] text-right">
+        Tổng tiền: <span id="cart-total-popup">0đ</span>
+</div>
+<div class="mt-4 flex justify-between">
+<button class="btn btn-close" onclick="closeCartPopup()">Đóng</button>
+<button class="btn btn-main" onclick="checkout()">Thanh toán</button>
+</div>
 <!-- Product Popups -->
 <div class="popup" id="product-popup-cao-xoa-bop-1">
 <div class="popup-content">
-<h3>1 chai Cao Xoa Bóp Thảo Dược 8S (50ml)</h3>
-<img alt="Cao Xoa Bóp 1 Chai" loading="lazy" src="https://via.placeholder.com/300x200?text=Cao+Xoa+Bóp+1+Chai"/>
-<p><strong>Giá:</strong> 169.000đ</p>
+<h3>Cao Xoa Bóp Chai Nhôm (50ml)</h3>
+<img alt="Cao Xoa Bóp Chai Nhôm" loading="lazy" src="https://8sangbds.com/img/cao1.png"/>
+<p><strong>Giá:</strong> 239.000đ</p>
 <p><strong>Mô tả:</strong> Cao Xoa Bóp Thảo Dược 8S được chiết xuất từ các loại thảo dược thiên nhiên, mang đến giải pháp giảm đau nhức và thư giãn cơ bắp hiệu quả.</p>
 <p><strong>Công dụng:</strong></p>
 <ul>
@@ -1402,9 +1449,26 @@ header, .header, .site-header {
 <li>Hỗ trợ thư giãn cơ bắp sau vận động mạnh.</li>
 <li>Cải thiện tuần hoàn máu, giảm tê bì.</li>
 </ul>
-<button class="btn btn-main btn-pulse" onclick="addToCart('Cao Xoa Bóp 1 chai', 169000)">Thêm vào giỏ</button>
-<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Cao Xoa Bóp 1 chai')">Mua ngay</button>
+<button class="btn btn-main btn-pulse" onclick="addToCart('Cao Xoa Bóp Chai Nhôm', 239000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Cao Xoa Bóp Chai Nhôm')">Mua ngay</button>
 <button class="btn btn-close mt-2" onclick="closeProductPopup('cao-xoa-bop-1')">Đóng</button>
+</div>
+</div>
+<div class="popup" id="product-popup-cao-xoa-bop-3">
+<div class="popup-content">
+<h3>Combo 3 Tặng 1 Cao</h3>
+<img alt="Combo 3 Tặng 1 Cao" loading="lazy" src="https://8sangbds.com/img/cao2.png"/>
+<p><strong>Giá:</strong> 717.000đ <span class="old-price">956.000đ</span></p>
+<p><strong>Mô tả:</strong> Combo 3+1 chai Cao Xoa Bóp, lý tưởng cho gia đình, giúp giảm đau nhức hiệu quả với chiết xuất thảo dược tự nhiên.</p>
+<p><strong>Công dụng:</strong></p>
+<ul>
+<li>Giảm đau nhức cơ, khớp và mỏi lưng.</li>
+<li>Hỗ trợ thư giãn cơ bắp sau vận động mạnh.</li>
+<li>Cải thiện tuần hoàn máu.</li>
+</ul>
+<button class="btn btn-main btn-pulse" onclick="addToCart('Combo Cao Xoa Bóp 3+1', 717000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Combo Cao Xoa Bóp 3+1')">Mua ngay</button>
+<button class="btn btn-close mt-2" onclick="closeProductPopup('cao-xoa-bop-3')">Đóng</button>
 </div>
 </div>
 <div class="popup" id="product-popup-cao-xoa-bop-5">
@@ -1424,28 +1488,11 @@ header, .header, .site-header {
 <button class="btn btn-close mt-2" onclick="closeProductPopup('cao-xoa-bop-5')">Đóng</button>
 </div>
 </div>
-<div class="popup" id="product-popup-cao-xoa-bop-3">
-<div class="popup-content">
-<h3>Combo 3 Chai Cao Xoa Bóp</h3>
-<img alt="Combo 3 Chai Cao Xoa Bóp" loading="lazy" src="https://via.placeholder.com/300x200?text=Cao+Xoa+Bóp+Combo+3"/>
-<p><strong>Giá:</strong> 499.000đ <span class="old-price">507.000đ</span></p>
-<p><strong>Mô tả:</strong> Combo 3 chai Cao Xoa Bóp, lý tưởng cho gia đình, giúp giảm đau nhức hiệu quả với chiết xuất thảo dược tự nhiên.</p>
-<p><strong>Công dụng:</strong></p>
-<ul>
-<li>Giảm đau nhức cơ, khớp và mỏi lưng.</li>
-<li>Hỗ trợ thư giãn cơ bắp sau vận động mạnh.</li>
-<li>Cải thiện tuần hoàn máu.</li>
-</ul>
-<button class="btn btn-main btn-pulse" onclick="addToCart('Combo 3 Chai Cao Xoa Bóp', 499000)">Thêm vào giỏ</button>
-<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Combo 3 Chai Cao Xoa Bóp')">Mua ngay</button>
-<button class="btn btn-close mt-2" onclick="closeProductPopup('cao-xoa-bop-3')">Đóng</button>
-</div>
-</div>
 <div class="popup" id="product-popup-dau-hit-1">
 <div class="popup-content">
 <h3>Dầu Hít Thảo Dược 8S (1 chai)</h3>
-<img alt="Dầu Hít Thảo Dược 8S (1 chai)" loading="lazy" src="https://via.placeholder.com/300x200?text=Dầu+Hít+1+Chai"/>
-<p><strong>Giá:</strong> 130.000đ <span class="old-price">199.000đ</span></p>
+<img alt="Dầu Hít Thảo Dược 8S (1 chai)" loading="lazy" src="https://8sangbds.com/images/dauhit011.jpg"/>
+<p><strong>Giá:</strong> 139.000đ <span class="old-price">199.000đ</span></p>
 <p><strong>Mô tả:</strong> Dầu Hít Thảo Dược 8S với tinh dầu tự nhiên, giúp thông mũi, giảm nghẹt và mang lại cảm giác sảng khoái tức thì.</p>
 <p><strong>Công dụng:</strong></p>
 <ul>
@@ -1453,59 +1500,59 @@ header, .header, .site-header {
 <li>Giảm đau đầu, mệt mỏi do cảm cúm.</li>
 <li>Mang lại cảm giác sảng khoái.</li>
 </ul>
-<button class="btn btn-main btn-pulse" onclick="addToCart('Dầu Hít Thảo Dược 8S (1 chai)', 130000)">Thêm vào giỏ</button>
+<button class="btn btn-main btn-pulse" onclick="addToCart('Dầu Hít Thảo Dược 8S (1 chai)', 139000)">Thêm vào giỏ</button>
 <button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Dầu Hít Thảo Dược 8S (1 chai)')">Mua ngay</button>
 <button class="btn btn-close mt-2" onclick="closeProductPopup('dau-hit-1')">Đóng</button>
 </div>
 </div>
-<div class="popup" id="product-popup-dau-hit-3">
-<div class="popup-content">
-<h3>Dầu Hít Thảo Dược 8S (Combo 3 Chai)</h3>
-<img alt="Dầu Hít Combo 3 Chai" loading="lazy" src="https://via.placeholder.com/300x200?text=Dầu+Hít+Combo+3"/>
-<p><strong>Giá:</strong> 360.000đ <span class="old-price">390.000đ</span></p>
-<p><strong>Mô tả:</strong> Combo 3 chai Dầu Hít, tiện lợi cho sử dụng lâu dài, mang lại cảm giác sảng khoái và hỗ trợ hô hấp.</p>
-<p><strong>Công dụng:</strong></p>
-<ul>
-<li>Thông mũi, giảm nghẹt mũi hiệu quả.</li>
-<li>Giảm đau đầu, mệt mỏi do cảm cúm.</li>
-<li>Mang lại cảm giác sảng khoái.</li>
-</ul>
-<button class="btn btn-main btn-pulse" onclick="addToCart('Dầu Hít Combo 3 Chai', 360000)">Thêm vào giỏ</button>
-<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Dầu Hít Combo 3 Chai')">Mua ngay</button>
-<button class="btn btn-close mt-2" onclick="closeProductPopup('dau-hit-3')">Đóng</button>
-</div>
-</div>
 <div class="popup" id="product-popup-dau-hit-5">
 <div class="popup-content">
-<h3>Dầu Hít Thảo Dược 8S (Combo 5 Chai)</h3>
-<img alt="Dầu Hít Combo 5 Chai" loading="lazy" src="https://via.placeholder.com/300x200?text=Dầu+Hít+Combo+5"/>
-<p><strong>Giá:</strong> 600.000đ <span class="old-price">650.000đ</span></p>
-<p><strong>Mô tả:</strong> Combo 5 chai Dầu Hít, tối ưu chi phí, giúp thông mũi và mang lại cảm giác dễ chịu trong thời gian dài.</p>
+<h3>Dầu Hít Combo 5 Tặng 1</h3>
+<img alt="Dầu Hít Combo 5 Tặng 1" loading="lazy" src="https://8sangbds.com/images/5tang1dauhit.jpg"/>
+<p><strong>Giá:</strong> 695.000đ</p>
+<p><strong>Mô tả:</strong> Combo 5+1 chai Dầu Hít, tối ưu chi phí, giúp thông mũi và mang lại cảm giác dễ chịu trong thời gian dài.</p>
 <p><strong>Công dụng:</strong></p>
 <ul>
 <li>Thông mũi, giảm nghẹt mũi hiệu quả.</li>
 <li>Giảm đau đầu, mệt mỏi do cảm cúm.</li>
 <li>Mang lại cảm giác sảng khoái.</li>
 </ul>
-<button class="btn btn-main btn-pulse" onclick="addToCart('Dầu Hít Combo 5 Chai', 600000)">Thêm vào giỏ</button>
-<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Dầu Hít Combo 5 Chai')">Mua ngay</button>
+<button class="btn btn-main btn-pulse" onclick="addToCart('Combo Dầu Hít 5+1', 695000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Combo Dầu Hít 5+1')">Mua ngay</button>
 <button class="btn btn-close mt-2" onclick="closeProductPopup('dau-hit-5')">Đóng</button>
+</div>
+</div>
+<div class="popup" id="product-popup-dau-hit-10">
+<div class="popup-content">
+<h3>Dầu Hít Combo 10 Tặng 3</h3>
+<img alt="Dầu Hít Combo 10 Tặng 3" loading="lazy" src="https://8sangbds.com/images/mua10tang3dauhit.jpg"/>
+<p><strong>Giá:</strong> 1.390.000đ</p>
+<p><strong>Mô tả:</strong> Combo 10+3 chai Dầu Hít, tiện lợi cho sử dụng lâu dài, mang lại cảm giác sảng khoái và hỗ trợ hô hấp.</p>
+<p><strong>Công dụng:</strong></p>
+<ul>
+<li>Thông mũi, giảm nghẹt mũi hiệu quả.</li>
+<li>Giảm đau đầu, mệt mỏi do cảm cúm.</li>
+<li>Mang lại cảm giác sảng khoái.</li>
+</ul>
+<button class="btn btn-main btn-pulse" onclick="addToCart('Combo Dầu Hít 10+3', 1390000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Combo Dầu Hít 10+3')">Mua ngay</button>
+<button class="btn btn-close mt-2" onclick="closeProductPopup('dau-hit-10')">Đóng</button>
 </div>
 </div>
 <div class="popup" id="product-popup-vien-uong-1">
 <div class="popup-content">
-<h3>1 hộp Viên Uống Xương Khớp Thảo Dược 8S</h3>
-<img alt="1 hộp Viên Uống Xương Khớp Thảo Dược 8S" loading="lazy" src="https://via.placeholder.com/300x200?text=Viên+Uống+1+Hộp"/>
-<p><strong>Giá:</strong> 399.000đ</p>
-<p><strong>Mô tả:</strong> Viên Uống Xương Khớp Thảo Dược 8S hỗ trợ tăng cường sức khỏe xương khớp, giảm đau nhức và cải thiện vận động.</p>
+<h3>Viên Uống Thảo Dược 8S</h3>
+<img alt="Viên Uống Thảo Dược 8S" loading="lazy" src="https://8sangbds.com/img/vien1.png"/>
+<p><strong>Giá:</strong> 299.000đ</p>
+<p><strong>Mô tả:</strong> Viên Uống Thảo Dược 8S hỗ trợ tăng cường sức khỏe xương khớp, giảm đau nhức và cải thiện vận động.</p>
 <p><strong>Công dụng:</strong></p>
 <ul>
 <li>Hỗ trợ giảm đau nhức xương khớp.</li>
 <li>Tăng cường độ linh hoạt cho khớp.</li>
 <li>Cải thiện sức khỏe xương khớp lâu dài.</li>
 </ul>
-<button class="btn btn-main btn-pulse" onclick="addToCart('Viên Uống Xương Khớp Thảo Dược 8S (1 hộp)', 399000)">Thêm vào giỏ</button>
-<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Viên Uống Xương Khớp Thảo Dược 8S (1 hộp)')">Mua ngay</button>
+<button class="btn btn-main btn-pulse" onclick="addToCart('Viên Uống Thảo Dược 8S', 299000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Viên Uống Thảo Dược 8S')">Mua ngay</button>
 <button class="btn btn-close mt-2" onclick="closeProductPopup('vien-uong-1')">Đóng</button>
 </div>
 </div>
@@ -1513,6 +1560,7 @@ header, .header, .site-header {
 <div class="popup" id="order-popup">
 <div class="popup-content">
 <h3>Đặt hàng ngay</h3>
+<form onsubmit="submitOrder(event)">
 <div class="mb-4">
 <input class="w-full px-4 py-2 rounded-lg bg-[var(--accent-color)] border border-[#333] text-[var(--text-color)]" id="productInput" placeholder="Sản phẩm" readonly="" type="text"/>
 </div>
@@ -1527,278 +1575,302 @@ header, .header, .site-header {
 <div class="mb-4">
 <input class="w-full px-4 py-2 rounded-lg bg-[var(--accent-color)] border border-[#333] text-[var(--text-color)] focus:border-[var(--primary-color)] focus:outline-none transition-all duration-300" placeholder="Địa chỉ nhận hàng" required="" type="text"/>
 </div>
-<button class="btn btn-main btn-pulse w-full" onclick="submitOrder()">Xác nhận đặt hàng</button>
-<button class="btn btn-close mt-2 w-full" onclick="closeOrderPopup()">Hủy</button>
+<button class="btn btn-main btn-pulse w-full" type="submit">Xác nhận đặt hàng</button>
+<button class="btn btn-close mt-2 w-full" onclick="closeOrderPopup()" type="button">Hủy</button>
+</form>
 </div>
 </div>
 <!-- Policy Modal -->
 <div class="policy-modal" id="policy-modal">
-<div class="policy-content">
-<h3>Chính sách</h3>
-<div class="policy-grid">
+<div class="popup-content max-w-3xl w-full p-6 sm:p-8">
+<h3 class="text-[clamp(1.5rem,4vw,2rem)] mb-6 text-center">Chính Sách &amp; Quy Định</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Policy Details -->
+<div class="md:col-span-2 space-y-6">
 <div>
-<h4>Giới thiệu</h4>
-<p>CÔNG TY TNHH 8 SANG BDS cung cấp các sản phẩm thảo dược thiên nhiên chất lượng cao, an toàn và hiệu quả.</p>
-<h4>Chính sách bảo mật</h4>
-<p>Thông tin khách hàng được bảo vệ nghiêm ngặt, chỉ sử dụng cho mục đích giao hàng và hỗ trợ.</p>
-<h4>Phương thức thanh toán</h4>
-<p>Hỗ trợ thanh toán COD, chuyển khoản ngân hàng, và ví điện tử.</p>
-<h4>Chính sách đổi trả</h4>
-<p>Đổi trả trong 7 ngày nếu sản phẩm lỗi hoặc không đúng mô tả, miễn phí vận chuyển.</p>
+<h4 class="text-lg font-semibold text-[var(--primary-color)]">Giới Thiệu</h4>
+<p class="text-sm text-[var(--gray-color)]">Công Ty TNHH 8 Sang BDS chuyên cung cấp các sản phẩm thảo dược thiên nhiên chất lượng cao, an toàn, hiệu quả, mang lại sức khỏe và sự hài lòng cho khách hàng.</p>
 </div>
-<div class="policy-sidebar">
-<h4>Theo dõi chúng tôi</h4>
-<a href="https://www.facebook.com/8sangbds" target="_blank">
-<i class="fab fa-facebook-f"></i> 8 Sang BDS
+<div>
+<h4 class="text-lg font-semibold text-[var(--primary-color)]">Chính Sách Bảo Mật</h4>
+<p class="text-sm text-[var(--gray-color)]">Thông tin khách hàng được bảo mật tuyệt đối, chỉ sử dụng cho mục đích giao hàng, hỗ trợ khách hàng và cải thiện dịch vụ.</p>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-[var(--primary-color)]">Phương Thức Thanh Toán</h4>
+<p class="text-sm text-[var(--gray-color)]">Hỗ trợ thanh toán COD (nhận hàng trả tiền), chuyển khoản ngân hàng, và ví điện tử với quy trình an toàn, nhanh chóng.</p>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-[var(--primary-color)]">Chính Sách Đổi Trả</h4>
+<p class="text-sm text-[var(--gray-color)]">Đổi trả miễn phí trong 7 ngày nếu sản phẩm lỗi, không đúng mô tả, hoặc không đạt yêu cầu, với hỗ trợ vận chuyển tận tình.</p>
+</div>
+</div>
+<!-- Sidebar -->
+<div class="text-center md:text-left">
+<h4 class="text-lg font-semibold text-[var(--primary-color)] mb-4">Kết Nối Với Chúng Tôi</h4>
+<div class="flex flex-col gap-3">
+<a class="text-[var(--primary-color)] text-sm hover:text-[#e6c200] transition-colors duration-300 flex items-center gap-2" href="https://www.facebook.com/8sangbds" target="_blank">
+<i class="fab fa-facebook-f"></i> Fanpage 8 Sang BDS
+          </a>
+<a class="text-[var(--primary-color)] text-sm hover:text-[#e6c200] transition-colors duration-300 flex items-center gap-2" href="https://zalo.me/0818299606" target="_blank">
+<i class="fas fa-comment"></i> Zalo Hỗ Trợ
+          </a>
+<a class="text-[var(--primary-color)] text-sm hover:text-[#e6c200] transition-colors duration-300 flex items-center gap-2" href="tel:1900888663">
+<i class="fas fa-phone-alt"></i> Hotline: 1900 888 663
           </a>
 </div>
 </div>
-<button class="btn btn-close mt-2 w-full" onclick="closePolicyModal()">Đóng</button>
+</div>
+<button class="btn btn-close mt-6 w-full md:w-auto md:mx-auto" onclick="closePolicyModal()">Đóng</button>
 </div>
 </div>
 <!-- Scripts -->
-<script defer="" src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script defer="" src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
     // Initialize AOS
-    document.addEventListener('DOMContentLoaded', () => {
-      if (typeof AOS !== 'undefined') {
-        AOS.init({
-          duration: 800,
-          once: true,
-          easing: 'ease-in-out',
-          offset: 100
-        });
-      } else {
-        console.error('AOS library failed to load');
-      }
+    AOS.init({ once: true, offset: 100 });
 
-      // Initialize Swiper
-      if (typeof Swiper !== 'undefined') {
-        new Swiper('.swiper-container', {
-          slidesPerView: 1,
-          spaceBetween: 20,
-          loop: true,
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-          },
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
-          breakpoints: {
-            768: {
-              slidesPerView: 2,
-              spaceBetween: 30,
-            },
-            1024: {
-              slidesPerView: 3,
-              spaceBetween: 30,
-            },
-          },
-        });
-      } else {
-        console.error('Swiper library failed to load');
+    // Swiper for News Section
+    const swiper = new Swiper('.swiper-container', {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      pagination: { el: '.swiper-pagination', clickable: true },
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+      breakpoints: {
+        640: { slidesPerView: 2, spaceBetween: 20 },
+        1024: { slidesPerView: 3, spaceBetween: 30 }
       }
-
-      // Ensure default tab is active
-      showTab('cao-xoa-bop', document.querySelector('.tab.active'));
     });
 
-    // Tab Functionality
+    // RSS Feed for News
+    async function fetchRSS() {
+      try {
+        const response = await axios.get('https://api.rss2json.com/v1/api.json?rss_url=https://caoxoabopthaoduoc8s.vn/feed/');
+        const items = response.data.items.slice(0, 6);
+        const rssContainer = document.getElementById('rss-news');
+        rssContainer.innerHTML = items.map(item => `
+          <div class="swiper-slide">
+            <img src="${item.thumbnail || 'https://via.placeholder.com/300x200?text=News+Image'}" alt="${item.title}" loading="lazy">
+            <h3>${item.title}</h3>
+            <p>${item.description.slice(0, 100)}...</p>
+            <a href="${item.link}" target="_blank" class="btn btn-main btn-sm">Đọc thêm</a>
+          </div>
+        `).join('');
+        swiper.update();
+      } catch (error) {
+        console.error('Error fetching RSS:', error);
+      }
+    }
+    fetchRSS();
+
+    // Tabs Functionality
     function showTab(tabId, element) {
-      console.log('Switching to tab:', tabId);
-      document.querySelectorAll('.tab-content').forEach(content => {
-        content.classList.remove('active');
-        content.style.display = 'none';
-      });
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
       document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-      const tabContent = document.getElementById(tabId);
-      if (tabContent) {
-        tabContent.classList.add('active');
-        tabContent.style.display = 'block';
-        element.classList.add('active');
-      } else {
-        console.error('Tab content not found:', tabId);
-      }
-    }
-
-    // Popup Functionality
-    function openProductPopup(id) {
-      console.log('Opening product popup:', id);
-      const popup = document.getElementById(`product-popup-${id}`);
-      if (popup) {
-        popup.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      } else {
-        console.error('Popup not found:', id);
-      }
-    }
-
-    function closeProductPopup(id) {
-      const popup = document.getElementById(`product-popup-${id}`);
-      if (popup) {
-        popup.classList.remove('active');
-        document.body.style.overflow = 'auto';
-      }
-    }
-
-    function openOrderPopup(product) {
-      console.log('Opening order popup for:', product);
-      const popup = document.getElementById('order-popup');
-      const productInput = document.getElementById('productInput');
-      productInput.value = product;
-      popup.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeOrderPopup() {
-      const popup = document.getElementById('order-popup');
-      popup.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    }
-
-    function submitOrder() {
-      console.log('Order submitted');
-      closeOrderPopup();
-    }
-
-    // Policy Modal
-    function openPolicyModal() {
-      console.log('Opening policy modal');
-      const modal = document.getElementById('policy-modal');
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closePolicyModal() {
-      const modal = document.getElementById('policy-modal');
-      modal.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    }
-
-    // Social Chat
-    function openFacebookChat() {
-      console.log('Opening Facebook chat');
-      window.open('https://m.me/your_facebook_page_id', '_blank');
-    }
-
-    function openZaloChat() {
-      console.log('Opening Zalo chat');
-      window.open('https://zalo.me/your_zalo_phone_number', '_blank');
+      document.getElementById(tabId).classList.add('active');
+      element.classList.add('active');
     }
 
     // Cart Functionality
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    function addToCart(name, price) {
-      console.log('Added to cart:', name, price);
+    function saveCart() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function updateCartCount() {
+      const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+      document.getElementById('cart-count').textContent = cartCount;
+    }
+
+    function renderCart() {
+      const cartItems = document.getElementById('cart-items');
+      const cartItemsPopup = document.getElementById('cart-items-popup');
+      const cartTotal = document.getElementById('cart-total');
+      const cartTotalPopup = document.getElementById('cart-total-popup');
+
+      cartItems.innerHTML = cart.length ? cart.map((item, index) => `
+        <div class="cart-item">
+          <span>${item.name} x${item.quantity}</span>
+          <span>${(item.price * item.quantity).toLocaleString()}đ</span>
+          <button onclick="removeFromCart(${index})">Xóa</button>
+        </div>
+      `).join('') : '<p>Giỏ hàng trống</p>';
+
+      cartItemsPopup.innerHTML = cart.length ? cart.map((item, index) => `
+        <div class="flex items-center justify-between p-2 border-b border-[#333]">
+          <div class="flex items-center gap-2">
+            <img src="${item.image || 'https://via.placeholder.com/50'}" alt="${item.name}" class="w-12 h-12 object-cover rounded">
+            <div>
+              <p class="font-semibold">${item.name}</p>
+              <p class="text-[var(--gray-color)]">${item.price.toLocaleString()}đ x ${item.quantity}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="px-2 py-1 bg-[var(--primary-color)] text-black rounded" onclick="updateQuantity(${index}, -1)">-</button>
+            <span>${item.quantity}</span>
+            <button class="px-2 py-1 bg-[var(--primary-color)] text-black rounded" onclick="updateQuantity(${index}, 1)">+</button>
+            <button class="px-2 py-1 bg-red-600 text-white rounded" onclick="removeFromCart(${index})">Xóa</button>
+          </div>
+        </div>
+      `).join('') : '<p>Giỏ hàng trống</p>';
+
+      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      cartTotal.textContent = total.toLocaleString();
+      cartTotalPopup.textContent = total.toLocaleString() + 'đ';
+      updateCartCount();
+    }
+
+    function addToCart(name, price, image = 'https://via.placeholder.com/50') {
       const existingItem = cart.find(item => item.name === name);
       if (existingItem) {
         existingItem.quantity += 1;
       } else {
-        cart.push({ name, price, quantity: 1 });
+        cart.push({ name, price, quantity: 1, image });
       }
-      localStorage.setItem('cart', JSON.stringify(cart));
+      saveCart();
+      renderCart();
+      toggleCart(true);
     }
 
-    // Close popup when clicking outside
-    document.querySelectorAll('.popup, .policy-modal').forEach(el => {
-      el.addEventListener('click', (e) => {
-        if (e.target === el) {
-          el.classList.remove('active');
-          document.body.style.overflow = 'auto';
-        }
-      });
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      saveCart();
+      renderCart();
+    }
+
+    function updateQuantity(index, change) {
+      cart[index].quantity += change;
+      if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
+      }
+      saveCart();
+      renderCart();
+    }
+
+    function toggleCart(force = null) {
+      const cartPanel = document.getElementById('cart-panel');
+      if (force === true) {
+        cartPanel.classList.add('active');
+      } else if (force === false) {
+        cartPanel.classList.remove('active');
+      } else {
+        cartPanel.classList.toggle('active');
+      }
+    }
+
+    // Popup Functions
+    function openProductPopup(id) {
+      document.getElementById(`product-popup-${id}`).classList.add('active');
+    }
+
+    function closeProductPopup(id) {
+      document.getElementById(`product-popup-${id}`).classList.remove('active');
+    }
+
+    function openCartPopup() {
+      renderCart();
+      document.getElementById('cart-popup').classList.add('active');
+    }
+
+    function closeCartPopup() {
+      document.getElementById('cart-popup').classList.remove('active');
+    }
+
+    function openOrderPopup(productName) {
+      document.getElementById('productInput').value = productName;
+      document.getElementById('order-popup').classList.add('active');
+    }
+
+    function closeOrderPopup() {
+      document.getElementById('order-popup').classList.remove('active');
+    }
+
+    function openPolicyModal() {
+      document.getElementById('policy-modal').classList.add('active');
+    }
+
+    function closePolicyModal() {
+      document.getElementById('policy-modal').classList.remove('active');
+    }
+
+    function submitOrder(event) {
+      event.preventDefault();
+      alert('Đơn hàng đã được gửi! Chúng tôi sẽ liên hệ sớm.');
+      closeOrderPopup();
+    }
+
+    // Social Chat
+    function openFacebookChat() {
+      window.open('https://m.me/8sangbds', '_blank');
+    }
+
+    function openZaloChat() {
+      window.open('https://zalo.me/0818299606', '_blank');
+    }
+
+    // Back to Top
+    window.addEventListener('scroll', () => {
+      const backToTop = document.querySelector('.back-to-top');
+      backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
     });
+
+    // Logo Scroll to Top
+    document.querySelector('.logo img').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Initial Render
+    renderCart();
   </script>
-<!-- Facebook SDK -->
-<script async="" crossorigin="anonymous" defer="" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&amp;version=v20.0&amp;appId=your_facebook_app_id"></script>
-<!-- Cart Popup -->
-<div class="popup" id="cart-popup">
-<div class="popup-content max-w-xl">
-<h3>Giỏ hàng</h3>
-<div class="space-y-4 text-left text-sm text-[var(--text-color)] max-h-80 overflow-y-auto" id="cart-items"></div>
-<div class="mt-4 font-bold text-lg text-[var(--primary-color)] text-right">
-      Tổng tiền: <span id="cart-total">0đ</span>
+</div></div>
+<div class="popup" id="product-popup-cao-xoa-bop-6">
+<div class="popup-content">
+<h3>Cao Xoa Bóp Phiên Bản Đỏ (50ml)</h3>
+<img alt="Cao Xoa Bóp Đỏ" src="https://8sangbds.com/img/cao1.png"/>
+<p><strong>Giá:</strong> 199.000đ</p>
+<p><strong>Mô tả:</strong> Phiên bản đặc biệt hỗ trợ xương khớp tốt hơn.</p>
+<ul>
+<li>Giảm đau khớp và mỏi vai gáy.</li>
+<li>Giúp lưu thông máu tốt hơn.</li>
+<li>Dễ sử dụng, mùi thảo dược dịu nhẹ.</li>
+</ul>
+<button class="btn btn-main btn-pulse" onclick="addToCart('Cao Xoa Bóp Phiên Bản Đỏ (50ml)', 199000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Cao Xoa Bóp Phiên Bản Đỏ (50ml)')">Mua ngay</button>
+<button class="btn btn-close mt-2" onclick="closeProductPopup('cao-xoa-bop-6')">Đóng</button>
 </div>
-<div class="mt-4 flex justify-between">
-<button class="btn btn-close" onclick="closeCart()">Đóng</button>
-<button class="btn btn-main" onclick="checkout()">Thanh toán</button>
+</div>
+<div class="popup" id="product-popup-cao-xoa-bop-7">
+<div class="popup-content">
+<h3>Cao Xoa Bóp Phiên Bản Vàng (50ml)</h3>
+<img alt="Cao Xoa Bóp Vàng" src="https://8sangbds.com/img/cao1.png"/>
+<p><strong>Giá:</strong> 179.000đ</p>
+<p><strong>Mô tả:</strong> Công thức ấm nóng giúp thư giãn cơ hiệu quả.</p>
+<ul>
+<li>Làm ấm nhanh vùng đau nhức.</li>
+<li>Hỗ trợ thư giãn vùng cổ vai gáy.</li>
+<li>Dùng tiện lợi tại nhà.</li>
+</ul>
+<button class="btn btn-main btn-pulse" onclick="addToCart('Cao Xoa Bóp Phiên Bản Vàng (50ml)', 179000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Cao Xoa Bóp Phiên Bản Vàng (50ml)')">Mua ngay</button>
+<button class="btn btn-close mt-2" onclick="closeProductPopup('cao-xoa-bop-7')">Đóng</button>
 </div>
 </div>
+<div class="popup" id="product-popup-cao-xoa-bop-8">
+<div class="popup-content">
+<h3>Combo 3 Loại Nâu, Đen, Xanh</h3>
+<img alt="Combo 3 Loại" src="https://8sangbds.com/img/cao2.png"/>
+<p><strong>Giá:</strong> 579.000đ</p>
+<p><strong>Mô tả:</strong> Bộ combo đặc biệt chăm sóc toàn diện cho cơ, khớp và lưu thông máu.</p>
+<ul>
+<li>Kết hợp ưu điểm của 3 dòng Cao Xoa Bóp.</li>
+<li>Phù hợp cho mọi lứa tuổi.</li>
+<li>Tiết kiệm hơn khi mua combo.</li>
+</ul>
+<button class="btn btn-main btn-pulse" onclick="addToCart('Combo 3 Loại Nâu, Đen, Xanh', 579000)">Thêm vào giỏ</button>
+<button class="btn btn-buy-now btn-pulse" onclick="openOrderPopup('Combo 3 Loại Nâu, Đen, Xanh')">Mua ngay</button>
+<button class="btn btn-close mt-2" onclick="closeProductPopup('cao-xoa-bop-8')">Đóng</button>
 </div>
-<!-- Nút mở giỏ hàng -->
-<button class="btn btn-main fixed top-5 right-5 z-[999]" onclick="openCart()">🛒 Giỏ hàng</button>
-<script>
-  let cart = [];
-
-  function addToCart(name, price) {
-    const existing = cart.find(item => item.name === name);
-    if (existing) {
-      existing.quantity++;
-    } else {
-      cart.push({ name, price, quantity: 1, image: getImageByName(name) });
-    }
-    updateCartDisplay();
-  }
-
-  function getImageByName(name) {
-    const product = document.querySelector(`img[alt*="${name}"]`);
-    return product ? product.src : 'https://via.placeholder.com/60';
-  }
-
-  function updateCartDisplay() {
-    const cartItems = document.getElementById('cart-items');
-    const cartTotal = document.getElementById('cart-total');
-    cartItems.innerHTML = '';
-    let total = 0;
-
-    cart.forEach((item, index) => {
-      total += item.price * item.quantity;
-      cartItems.innerHTML += `
-        <div class="cart-item">
-          <img src="${item.image}" alt="${item.name}">
-          <div class="cart-item-info">
-            <p class="font-bold">${item.name}</p>
-            <p>${item.quantity} x ${item.price.toLocaleString()}đ</p>
-          </div>
-          <div class="cart-item-actions">
-            <button onclick="changeQuantity(${index}, 1)">+</button>
-            <button onclick="changeQuantity(${index}, -1)">−</button>
-            <button onclick="removeItem(${index})">Xóa</button>
-          </div>
-        </div>`;
-    });
-
-    cartTotal.textContent = total.toLocaleString() + 'đ';
-  }
-
-  function changeQuantity(index, delta) {
-    cart[index].quantity += delta;
-    if (cart[index].quantity <= 0) cart.splice(index, 1);
-    updateCartDisplay();
-  }
-
-  function removeItem(index) {
-    cart.splice(index, 1);
-    updateCartDisplay();
-  }
-
-  function openCart() {
-    document.getElementById('cart-popup').classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeCart() {
-    document.getElementById('cart-popup').classList.remove('active');
-    document.body.style.overflow = 'auto';
-  }
-
-  function checkout() {
-    alert("Tính năng thanh toán đang được phát triển!");
-  }
-</script>
+</div>
 </body>
-</html> 
+</html>
